@@ -12,24 +12,24 @@ class BaseElement {
         return await $$(this.elementLocator);
     }
     async getText() {
-        console.log(`    ▶ get displayed ${this.elementName}`)
+        console.log(`▶ get displayed ${this.elementName}`)
         const element = await this.getElement();
         const text = await element.getText();
-        console.log(`    ▶ text contains: "${text}"`)
+        console.log(`▶ text contains: "${text}"`)
         return text;
     }
     async clickButton() {
-        console.log(`    ▶ click ${this.elementName}`)
+        console.log(`▶ click ${this.elementName}`)
         const element = await this.getElement();
         await element.click();
     }
     async inputText(text) {
-        console.log(`    ▶ input ${this.elementName}`)
+        console.log(`▶ input ${this.elementName}`)
         const element = await this.getElement();
         await element.setValue(text);
     }
     async enterText(text) {
-        console.log(`    ▶ input ${this.elementName} and submit`)
+        console.log(`▶ input ${this.elementName} and submit`)
         const element = await this.getElement();
         await element.setValue(text);
         await browser.keys('Enter');
@@ -40,7 +40,7 @@ class BaseElement {
         return atr;
     }
     async elementIsDisplayed() {
-        console.log(`    ▶ ${this.elementName} is present`)
+        console.log(`▶ ${this.elementName} is present`)
         const element = await this.getElement();
         const bool = await element.isDisplayed();
         return bool;
@@ -51,11 +51,11 @@ class BaseElement {
         return bool;
     }
     async waitIsClickable() {
-        console.log(`    ▶ wait ${this.elementName} is visible`)
+        console.log(`▶ wait ${this.elementName} is visible`)
         await this.getElement().waitForClickable({timeout:configManager.getConfigData().waitTime});
     }
     async waitIsEnabled() {
-        console.log(`    ▶ wait ${this.elementName} is enabled`)
+        console.log(`▶ wait ${this.elementName} is enabled`)
         await this.getElement().waitForEnabled({timeout:configManager.getConfigData().waitTime});
     }
 }

@@ -9,13 +9,13 @@ class BaseForm {
         return await $(this.pageLocator);
     }
     async pageIsDisplayed() {
-        console.log(`    ▶ ${this.pageName} is open`)
+        console.log(`▶ ${this.pageName} is open`)
         const uniqueElement = await this.getUniqueElement();
         const bool = await uniqueElement.isDisplayed();
         return bool;
     }
     async pageIsEnabled() {
-        console.log(`    ▶ ${this.pageName} is enabled`)
+        console.log(`▶ ${this.pageName} is enabled`)
         const element = await this.getUniqueElement();
         return await element.isEnabled();
     }
