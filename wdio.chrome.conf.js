@@ -8,7 +8,7 @@ exports.config = {
                 browserName: 'chrome',
                 acceptInsecureCerts: true,
                 "goog:chromeOptions": {
-                    args: ['--incognito']
+                    args: ['--incognito', '--start-maximized']
                 }
             }
         ],

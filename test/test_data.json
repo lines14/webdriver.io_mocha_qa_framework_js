@@ -1,4 +1,5 @@
 {
-  "randomPassword": "password",
-  "randomEmail": "password@gmail.com"
+  "password": "Myp1ssword",
+  "email": "random",
+  "domain": "gmail"
 }
