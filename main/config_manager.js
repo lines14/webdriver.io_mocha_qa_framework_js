@@ -1,14 +1,19 @@
 const configureData = require('../main/config_data.json');
 const testData = require('../test/test_data.json');
+const path = require("path");
 
 class ConfigManager {
     getConfigData() {
-        const path = JSON.parse(JSON.stringify(configureData));
-        return path;
+        const dataPath = JSON.parse(JSON.stringify(configureData));
+        return dataPath;
     }
     getTestData() {
-        const dataList = JSON.parse(JSON.stringify(testData));
-        return dataList;
+        const dataPath = JSON.parse(JSON.stringify(testData));
+        return dataPath;
+    }
+    getTestFile() {
+        const filePath = path.join(__dirname, "..", "test_image.jpg");
+        return filePath;
     }
 }
 

@@ -15,15 +15,19 @@ class BaseForm {
         return bool;
     }
     async pageIsEnabled() {
-        console.log(`▶ ${this.pageName} is enabled`)
+        console.log(`▶ ${this.pageName} is enable`)
         const element = await this.getUniqueElement();
         return await element.isEnabled();
     }
     async waitPageIsDisplayed() {
-        await this.getUniqueElement().waitForDisplayed({timeout:configManager.getConfigData().waitTime})
+        console.log(`▶ wait ${this.elementName} is open`)
+        const element = await this.getUniqueElement();
+        await element.waitForDisplayed({timeout:configManager.getConfigData().waitTime});
     }
     async waitPageIsEnabled() {
-        await this.getUniqueElement().waitForEnabled({timeout:configManager.getConfigData().waitTime})
+        console.log(`▶ wait ${this.elementName} is enable`)
+        const element = await this.getUniqueElement();
+        await element.waitForEnabled({timeout:configManager.getConfigData().waitTime});
     }
 }
 
