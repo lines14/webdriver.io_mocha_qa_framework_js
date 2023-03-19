@@ -10,6 +10,7 @@ describe('Userinterface task', function(){
     before(async function() {
         await browserLogger.configureLogger();
     });
+    
     it('Test case 1', async function() {
         await browser.url(configManager.getConfigData().url);
         assert.isTrue(await homePage.pageIsDisplayed(), 'welcome page is not open');
@@ -18,18 +19,14 @@ describe('Userinterface task', function(){
         assert.isTrue(await signInForm.pageIsDisplayed(), 'The "1" card is not open');
 
         await signInForm.inputSignInData();
-        await signInForm.clickOtherButton();
-
-        await signInForm.clickDropdownButton();
-        
+        await signInForm.openDropdown();
+        await signInForm.clickButtonFromDropdown();
         await signInForm.clickAcceptCheckbox();
         await signInForm.clickNextButton();
         assert.isTrue(await thisIsMeForm.pageIsDisplayed(), 'The "2" card is not open');
 
-        await thisIsMeForm.clickUnselectAllCheckBox();
-        await thisIsMeForm.clickCinnamonCheckBox();
-        await thisIsMeForm.clickMulletsCheckBox();
-        await thisIsMeForm.clickWindowsCheckBox();
+        await thisIsMeForm.clickUnselectAllCheckbox();
+        await thisIsMeForm.clickThreeRandomCheckboxes();
         await thisIsMeForm.uploadImage();
         await thisIsMeForm.clickNextButton();
         assert.isTrue(await personalDetailsForm.pageIsDisplayed(), 'The "3" card is not open');

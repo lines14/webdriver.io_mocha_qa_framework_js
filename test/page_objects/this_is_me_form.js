@@ -7,30 +7,27 @@ const configManager = require('../../main/config_manager');
 class ThisIsMeForm extends BaseForm {
     constructor() {
         super('//h2[@class="avatar-and-interests__title" and text()="This is me"]', '"this is me" form');
-        this.unselectAllCheckBox = new CheckBox('[for="interest_unselectall"] .checkbox__check', '"unselect all" checkbox');
-        this.cinnamonCheckBox = new CheckBox('[for="interest_cinnamon"] .checkbox__check', '"cinnamon" checkbox');
-        this.mulletsCheckBox = new CheckBox('[for="interest_mullets"] .checkbox__check', '"mullets" checkbox');
-        this.windowsCheckBox = new CheckBox('[for="interest_windows"] .checkbox__check', '"windows" checkbox');
+        this.unselectAllCheckbox = new CheckBox('[for="interest_unselectall"] .checkbox__check', '"unselect all" checkbox');
+        this.selectAllCheckbox = new CheckBox('[for="interest_selectall"] .checkbox__check', '"select all" checkbox');
+        this.allCheckboxes = new CheckBox('.checkbox__check', 'all checkboxes');
         this.uploadImageLink = new Label('//a[@class="avatar-and-interests__upload-button" and text()="upload"]', 'image');
         this.nextButton = new Button('.button--white', '"next" button');
     }
-    async clickUnselectAllCheckBox() {
-        await this.unselectAllCheckBox.clickButton();
+
+    async clickUnselectAllCheckbox() {
+        await this.unselectAllCheckbox.clickElement();
     }
-    async clickCinnamonCheckBox() {
-        await this.cinnamonCheckBox.clickButton();
+
+    async clickThreeRandomCheckboxes() {
+        await this.allCheckboxes.clickRandomElementsFromList(configManager.getTestData().checkboxCount, this.selectAllCheckbox.elementLocator, this.unselectAllCheckbox.elementLocator);
     }
-    async clickMulletsCheckBox() {
-        await this.mulletsCheckBox.clickButton();
-    }
-    async clickWindowsCheckBox() {
-        await this.windowsCheckBox.clickButton();
-    }
+
     async uploadImage() {
         await this.uploadImageLink.inputData(configManager.getTestFile());
     }
+    
     async clickNextButton() {
-        await this.nextButton.clickButton();
+        await this.nextButton.clickElement();
     }
 }
 

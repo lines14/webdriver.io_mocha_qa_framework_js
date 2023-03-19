@@ -10,7 +10,7 @@ exports.config = {
         browserName: 'chrome',
         acceptInsecureCerts: true
     }],
-    logLevel: 'warn',
+    logLevel: 'error',
     bail: 0,
     baseUrl: 'http://localhost',
     waitforTimeout: 10000,

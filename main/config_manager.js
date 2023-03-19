@@ -6,9 +6,11 @@ class ConfigManager {
     getConfigData() {
         return JSON.parse(JSON.stringify(configureData));
     }
+
     getTestData() {
         return JSON.parse(JSON.stringify(testData));
     }
+    
     getTestFile() {
         return path.join(__dirname, "..", "test_image.jpg");
     }

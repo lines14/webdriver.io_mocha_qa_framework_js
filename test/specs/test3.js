@@ -8,6 +8,7 @@ describe('Userinterface task', function(){
     before(async function() {
         await browserLogger.configureLogger();
     });
+    
     it('Test case 3', async function() {
         await browser.url(configManager.getConfigData().url);
         assert.isTrue(await homePage.pageIsDisplayed(), 'welcome page is not open');

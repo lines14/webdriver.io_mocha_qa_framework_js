@@ -8,6 +8,7 @@ describe('Userinterface task', function(){
     before(async function() {
         await browserLogger.configureLogger();
     });
+    
     it('Test case 4', async function() {
         await browser.url(configManager.getConfigData().url);
         await homePage.pageIsDisplayed();

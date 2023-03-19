@@ -1,5 +1,16 @@
 class Randomizer {
-    getRandomString(minLength, maxLength, hasUpperCase, hasNumber, chosenLetter, hasCyrillic) {
+    async getRandomElement(...allElementsLists) {
+        const baseElementsList = allElementsLists[0].slice(0, allElementsLists[0].length);
+        const exceptionsList = allElementsLists[1];
+    
+        let element;
+        do {
+            element = baseElementsList[Math.floor(Math.random() * baseElementsList.length)];
+        } while ((exceptionsList.map(elem => elem.elementId)).includes(element.elementId));
+        return element;
+    }
+
+    async getRandomString(hasUpperCase, hasNumber, hasCyrillic, chosenLetter, minLength=0, maxLength=10) {
         const upperCaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz';
         const numbers = '0123456789';
