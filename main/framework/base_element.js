@@ -100,7 +100,7 @@ class BaseElement {
         for (let counter = 0; counter < count; counter++) {
             console.log(`▶ click random element from ${this.elementName}`);
             const randomElement = await randomizer.getRandomElement(await this.getElements(), exceptionsList);
-            await randomElement.click();
+            await browser.action('pointer').move({ duration: 0, origin: randomElement }).down({ button: 0 }).up({ button: 0 }).perform();
             exceptionsList.push(randomElement);
         }
     }
