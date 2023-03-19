@@ -9,25 +9,20 @@ class BaseForm {
         return await $(this.pageLocator);
     }
     async pageIsDisplayed() {
-        console.log(`▶ ${this.pageName} is open`)
-        const uniqueElement = await this.getUniqueElement();
-        const bool = await uniqueElement.isDisplayed();
-        return bool;
+        console.log(`▶ ${this.pageName} is open`);
+        return await (await this.getUniqueElement()).isDisplayed();
     }
     async pageIsEnabled() {
-        console.log(`▶ ${this.pageName} is enable`)
-        const element = await this.getUniqueElement();
-        return await element.isEnabled();
+        console.log(`▶ ${this.pageName} is enable`);
+        return await (await this.getUniqueElement()).isEnabled();
     }
     async waitPageIsDisplayed() {
-        console.log(`▶ wait ${this.elementName} is open`)
-        const element = await this.getUniqueElement();
-        await element.waitForDisplayed({timeout:configManager.getConfigData().waitTime});
+        console.log(`▶ wait ${this.elementName} is open`);
+        await (await this.getUniqueElement()).waitForDisplayed({timeout:configManager.getConfigData().waitTime});
     }
     async waitPageIsEnabled() {
-        console.log(`▶ wait ${this.elementName} is enable`)
-        const element = await this.getUniqueElement();
-        await element.waitForEnabled({timeout:configManager.getConfigData().waitTime});
+        console.log(`▶ wait ${this.elementName} is enable`);
+        await (await this.getUniqueElement()).waitForEnabled({timeout:configManager.getConfigData().waitTime});
     }
 }
 

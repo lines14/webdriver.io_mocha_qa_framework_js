@@ -4,16 +4,13 @@ const path = require("path");
 
 class ConfigManager {
     getConfigData() {
-        const dataPath = JSON.parse(JSON.stringify(configureData));
-        return dataPath;
+        return JSON.parse(JSON.stringify(configureData));
     }
     getTestData() {
-        const dataPath = JSON.parse(JSON.stringify(testData));
-        return dataPath;
+        return JSON.parse(JSON.stringify(testData));
     }
     getTestFile() {
-        const filePath = path.join(__dirname, "..", "test_image.jpg");
-        return filePath;
+        return path.join(__dirname, "..", "test_image.jpg");
     }
 }
 

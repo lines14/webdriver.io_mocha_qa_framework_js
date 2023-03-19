@@ -1,8 +1,10 @@
-async function browserLogger() {
-    await browser.overwriteCommand('url', function (newUrl, urlValue) {
-        console.log(`▶ open url ${urlValue}`)
-        newUrl(urlValue)
-    })
+class BrowserLogger {
+    async configureLogger() {
+        await browser.overwriteCommand('url', function (newUrl, urlValue) {
+            console.log(`▶ open url ${urlValue}`)
+            newUrl(urlValue)
+        })
+    }
 }
 
-module.exports = browserLogger;
+module.exports = new BrowserLogger();

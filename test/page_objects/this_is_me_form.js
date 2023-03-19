@@ -6,13 +6,13 @@ const configManager = require('../../main/config_manager');
 
 class ThisIsMeForm extends BaseForm {
     constructor() {
-        super('h2=This is me', '"this is me" form');
+        super('//h2[@class="avatar-and-interests__title" and text()="This is me"]', '"this is me" form');
         this.unselectAllCheckBox = new CheckBox('[for="interest_unselectall"] .checkbox__check', '"unselect all" checkbox');
         this.cinnamonCheckBox = new CheckBox('[for="interest_cinnamon"] .checkbox__check', '"cinnamon" checkbox');
         this.mulletsCheckBox = new CheckBox('[for="interest_mullets"] .checkbox__check', '"mullets" checkbox');
         this.windowsCheckBox = new CheckBox('[for="interest_windows"] .checkbox__check', '"windows" checkbox');
-        this.uploadImageLink = new Label('a=upload', 'image');
-        this.nextButton = new Button('button=Next', '"next" button');
+        this.uploadImageLink = new Label('//a[@class="avatar-and-interests__upload-button" and text()="upload"]', 'image');
+        this.nextButton = new Button('.button--white', '"next" button');
     }
     async clickUnselectAllCheckBox() {
         await this.unselectAllCheckBox.clickButton();

@@ -1,5 +1,5 @@
 {
-  "password": "Myp1ssword",
-  "email": "random",
-  "domain": "gmail"
+  "stringLength": 10,
+  "sameCharacter": "a",
+  "timerValue": "00:00:00"
 }
