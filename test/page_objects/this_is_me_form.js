@@ -7,11 +7,11 @@ const configManager = require('../../main/config_manager');
 class ThisIsMeForm extends BaseForm {
     constructor() {
         super('//h2[@class="avatar-and-interests__title" and text()="This is me"]', '"this is me" form');
-        this.unselectAllCheckbox = new CheckBox('[for="interest_unselectall"] .checkbox__check', '"unselect all" checkbox');
-        this.selectAllCheckbox = new CheckBox('[for="interest_selectall"] .checkbox__check', '"select all" checkbox');
-        this.allCheckboxes = new CheckBox('.checkbox__check', 'all checkboxes');
+        this.unselectAllCheckbox = new CheckBox('//label[@for="interest_unselectall"]//span[contains(@class, "checkbox__check")]', '"unselect all" checkbox');
+        this.selectAllCheckbox = new CheckBox('//label[@for="interest_selectall"]//span[contains(@class, "checkbox__check")]', '"select all" checkbox');
+        this.allCheckboxes = new CheckBox('//span[contains(@class, "checkbox__check")]', 'all checkboxes');
         this.uploadImageLink = new Label('//a[@class="avatar-and-interests__upload-button" and text()="upload"]', 'image');
-        this.nextButton = new Button('.button--white', '"next" button');
+        this.nextButton = new Button('//button[contains(@class, "button--white")]', '"next" button');
     }
 
     async clickUnselectAllCheckbox() {

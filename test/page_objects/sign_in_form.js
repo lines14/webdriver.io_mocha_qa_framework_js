@@ -14,13 +14,13 @@ class SignInForm extends BaseForm {
         this.domainBox = new TextBox('//input[@placeholder="Domain"]', 'domain');
         this.dropdownOpenButton = new Button('//div[@class="dropdown__field" and text()="other"]', 'dropdown open button');
         this.allDropdownButtons = new Button('//div[@class="dropdown__list-item"]', 'all dropdown buttons');
-        this.acceptCheckbox = new CheckBox('.checkbox__check', '"accept" checkbox');
+        this.acceptCheckbox = new CheckBox('//span[contains(@class, "checkbox__check")]', '"accept" checkbox');
         this.nextButton = new Button('//a[@class="button--secondary" and text()="Next"]', '"next" button');
-        this.sendToBottomButton = new Button('.help-form__send-to-bottom-button', '"send to bottom" button');
-        this.helpFormCloseButton = new Button('.help-form__close-button', 'help form "close" button');
-        this.acceptCookiesButton = new Button('.button--transparent', '"not really, no" button');
+        this.sendToBottomButton = new Button('//button[contains(@class, "help-form__send-to-bottom-button")]', '"send to bottom" button');
+        this.helpFormCloseButton = new Button('//button[contains(@class, "help-form__close-button")]', 'help form "close" button');
+        this.acceptCookiesButton = new Button('//button[contains(@class, "button--transparent")]', '"not really, no" button');
         this.cookiesMessage = new Label('//p[@class="cookies__message" and contains(text(), "site uses cookies")]', 'cookies message');
-        this.timer = new Label('.timer--center', 'timer');
+        this.timer = new Label('//div[contains(@class, "timer--center")]', 'timer');
     }
 
     async inputSignInData() {
