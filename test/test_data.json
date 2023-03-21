@@ -1,1 +1,10 @@
-{}
+{
+    "apiPosts": "posts",
+    "apiUsers": "users",
+    "apiId_5": 5,
+    "apiId_99": 99,
+    "apiId_150": 150,
+    "code_200": 200,
+    "code_201": 201,
+    "code_404": 404
+}

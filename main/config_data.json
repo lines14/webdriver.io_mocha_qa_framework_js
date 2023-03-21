@@ -1,4 +1,4 @@
 {
-  "url": "https://userinyerface.com/",
-  "waitTime": 19000
+  "baseUrl": "https://jsonplaceholder.typicode.com",
+  "timeout": 1000
 }
