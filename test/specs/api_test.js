@@ -3,6 +3,7 @@ const assert = chai.assert, expectChai = chai.expect;
 chai.use(require("chai-sorted"));
 const configManager = require('../../main/config_manager');
 const jsonplaceholderApi = require('../jsonplaceholder_api');
+const logger = require('../../main/framework/logger');
 
 describe('REST API (GET/POST) task', function(){    
     it('Test JSONPlaceholder API', async function() {
@@ -37,5 +38,7 @@ describe('REST API (GET/POST) task', function(){
         response = await jsonplaceholderApi.getUsers(configManager.getTestData().apiId_5);
         assert.equal(response.status, configManager.getTestData().code_200, 'status code is not 200');
         assert.deepEqual(response.data, responseDataToCompare, 'user data not matches with user data in the previous step');
+
+        await logger.logToFile();
     });
 });
