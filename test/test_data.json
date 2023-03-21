@@ -1,10 +1,40 @@
 {
     "apiPosts": "posts",
     "apiUsers": "users",
+    "apiId": "id",
+    "apiTitle": "title",
+    "apiBody": "body",
     "apiId_5": 5,
     "apiId_99": 99,
     "apiId_150": 150,
+    "apiUserId_1": 1,
+    "apiUserId_10": 10,
     "code_200": 200,
     "code_201": 201,
-    "code_404": 404
+    "code_404": 404,
+    "emptyProperty": "",
+    "comparedUserIndex": 4,
+    "comparedUser": {
+        "id": 5,
+        "name": "Chelsey Dietrich",
+        "username": "Kamren",
+        "email": "Lucio_Hettinger@annie.ca",
+        "address": {
+            "street": "Skiles Walks",
+            "suite": "Suite 351",
+            "city": "Roscoeview",
+            "zipcode": "33263",
+            "geo": {
+                "lat": "-31.8129",
+                "lng": "62.5342"
+            }
+        },
+        "phone": "(254)954-1289",
+        "website": "demarco.info",
+        "company": {
+            "name": "Keebler LLC",
+            "catchPhrase": "User-centric fault-tolerant solution",
+            "bs": "revolutionize end-to-end systems"
+        }
+    }
 }

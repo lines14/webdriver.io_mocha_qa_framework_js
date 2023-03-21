@@ -9,33 +9,33 @@ class ApiTester {
 
     async get(endpoint, id) {
         try {
-            return await axios.get(`/${endpoint}`, { params: { id: id } });
+            return id ? await axios.get(`/${endpoint}/${id.toString()}`) : await axios.get(`/${endpoint}`);
         } catch (error) {
-            console.error(error);
+            return error.response;
         }
     }
 
-    async post(endpoint, userId, title, body) {
+    async post(endpoint, params) {
         try {
-            return await axios.post(`/${endpoint}`, { params: { userId: userId, title: title, body: body } });
+            return await axios.post(`/${endpoint}`, params);
         } catch (error) {
-            console.error(error.response.status);
+            return error.response;
         }
     }
 
-    async put(endpoint, id, userId, title, body) {
+    async put(endpoint, params) {
         try {
-            return await axios.put(`/${endpoint}`, { params: { id: id, userId: userId, title: title, body: body } });
+            return await axios.put(`/${endpoint}`, params);
         } catch (error) {
-            console.error(error.response.status);
+            return error.response;
         }
     }
 
-    async patch(endpoint, id, userId, title, body) {
+    async patch(endpoint, params) {
         try {
-            return await axios.patch(`/${endpoint}/${id.toString()}`, { params: { userId: userId, title: title, body: body } });
+            return await axios.patch(`/${endpoint}`, params);
         } catch (error) {
-            console.error(error.response.status);
+            return error.response;
         }
     }
 
@@ -43,7 +43,16 @@ class ApiTester {
         try {
             return await axios.delete(`/${endpoint}`, { params: { id: id } });
         } catch (error) {
-            console.error(error.response.status);
+            return error.response;
+        }
+    }
+
+    async isJson(response) {
+        try {
+            return typeof response === "object" ? true : false;
+        }
+        catch (error) {
+            return false;
         }
     }
 }

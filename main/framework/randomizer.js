@@ -20,7 +20,9 @@ class Randomizer {
       
         let randomString = '';
       
-        randomString += chosenLetter;
+        if (chosenLetter !== false) {
+            randomString += chosenLetter;
+        }
       
         let requiredCharacters = '';
         if (hasUpperCase) {
