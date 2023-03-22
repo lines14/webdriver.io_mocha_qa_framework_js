@@ -69,16 +69,6 @@ class ApiTester {
             return error.response;
         }
     }
-
-    async isJson(response) {
-        try {
-            logger.log(`▶    check response is json`);
-            return typeof response === "object" ? true : false;
-        }
-        catch (error) {
-            return false;
-        }
-    }
 }
 
 module.exports = ApiTester;

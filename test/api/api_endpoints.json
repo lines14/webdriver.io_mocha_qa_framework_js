@@ -1,0 +1,7 @@
+{
+    "apiPosts": "posts",
+    "apiUsers": "users",
+    "resourceId": "id",
+    "resourceTitle": "title",
+    "resourceBody": "body"
+}
