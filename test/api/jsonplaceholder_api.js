@@ -7,11 +7,11 @@ class JsonplaceholderApi extends ApiTester {
     }
 
     async getPosts(id) {
-        return await this.get(configManager.getApiEndpoint().apiPosts, id);
+        return id ? await this.get(`${configManager.getApiEndpoint().apiPosts}/${id}`) : await this.get(configManager.getApiEndpoint().apiPosts);
     }
 
     async getUsers(id) {
-        return await this.get(configManager.getApiEndpoint().apiUsers, id);
+        return id ? await this.get(`${configManager.getApiEndpoint().apiUsers}/${id}`) : await this.get(configManager.getApiEndpoint().apiUsers);
     }
 
     async postPosts(model) {

@@ -9,11 +9,10 @@ class ApiTester {
         this.axios.defaults.timeout = timeout;
     }
 
-    async get(endpoint, id) {
-        let response;
+    async get(endpoint) {
         try {
-            id ? logger.log(`[info] ▶ get id ${id} from ${endpoint}:`) : logger.log(`[info] ▶ get ${endpoint}:`);
-            id ? response = await axios.get(`/${endpoint}/${id.toString()}`) : response = await axios.get(`/${endpoint}`);
+            logger.log(`[info] ▶ get ${endpoint}:`);
+            const response = await axios.get(endpoint);
             logger.log(`[info]   status code: ${response.status}`);
             return response;
         } catch (error) {
@@ -58,10 +57,10 @@ class ApiTester {
         }
     }
 
-    async delete(endpoint, id) {
+    async delete(endpoint) {
         try {
-            logger.log(`[info] ▶ delete id ${id} in ${endpoint}`);
-            const response = await axios.delete(`/${endpoint}`, { params: { id: id } });
+            logger.log(`[info] ▶ delete ${endpoint}`);
+            const response = await axios.delete(endpoint);
             logger.log(`[info]   status code: ${response.status}`);
             return response;
         } catch (error) {
