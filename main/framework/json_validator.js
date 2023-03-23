@@ -3,7 +3,7 @@ const logger = require('./logger');
 class JsonValidator {
     async isJson(response) {
         try {
-            logger.log(`▶    check response is json`);
+            logger.log(`[info] ▶ check response is json`);
             return typeof response === "object" ? true : false;
         }
         catch (error) {

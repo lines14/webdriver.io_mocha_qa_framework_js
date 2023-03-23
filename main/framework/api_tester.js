@@ -4,7 +4,7 @@ const logger = require('./logger');
 class ApiTester {
     constructor(baseURL, timeout) {
         this.axios = axios;
-        logger.log(`▶    set api url ${baseURL}`);
+        logger.log(`[info] ▶ set api url ${baseURL}`);
         this.axios.defaults.baseURL = baseURL;
         this.axios.defaults.timeout = timeout;
     }
@@ -12,60 +12,60 @@ class ApiTester {
     async get(endpoint, id) {
         let response;
         try {
-            id ? logger.log(`▶    get id ${id} from ${endpoint}:`) : logger.log(`▶    get ${endpoint}:`);
+            id ? logger.log(`[info] ▶ get id ${id} from ${endpoint}:`) : logger.log(`[info] ▶ get ${endpoint}:`);
             id ? response = await axios.get(`/${endpoint}/${id.toString()}`) : response = await axios.get(`/${endpoint}`);
-            logger.log(`     status code: ${response.status}`);
+            logger.log(`[info]   status code: ${response.status}`);
             return response;
         } catch (error) {
-            logger.log(`     status code: ${error.response.status}`);
+            logger.log(`[info]   status code: ${error.response.status}`);
             return error.response;
         }
     }
 
     async post(endpoint, params) {
         try {
-            logger.log(`▶    post ${JSON.stringify(params)} to ${endpoint}:`);
+            logger.log(`[info] ▶ post ${JSON.stringify(params)} to ${endpoint}:`);
             const response = await axios.post(`/${endpoint}`, params);
-            logger.log(`     status code: ${response.status}`);
+            logger.log(`[info]   status code: ${response.status}`);
             return response;
         } catch (error) {
-            logger.log(`     status code: ${error.response.status}`);
+            logger.log(`[info]   status code: ${error.response.status}`);
             return error.response;
         }
     }
 
     async put(endpoint, params) {
         try {
-            logger.log(`▶    put ${JSON.stringify(params)} to ${endpoint}`);
+            logger.log(`[info] ▶ put ${JSON.stringify(params)} to ${endpoint}`);
             const response = await axios.put(`/${endpoint}`, params);
-            logger.log(`     status code: ${response.status}`);
+            logger.log(`[info]   status code: ${response.status}`);
             return response;
         } catch (error) {
-            logger.log(`     status code: ${error.response.status}`);
+            logger.log(`[info]   status code: ${error.response.status}`);
             return error.response;
         }
     }
 
     async patch(endpoint, params) {
         try {
-            logger.log(`▶    patch ${JSON.stringify(params)} in ${endpoint}`);
+            logger.log(`[info] ▶ patch ${JSON.stringify(params)} in ${endpoint}`);
             const response = await axios.patch(`/${endpoint}`, params);
-            logger.log(`     status code: ${response.status}`);
+            logger.log(`[info]   status code: ${response.status}`);
             return response;
         } catch (error) {
-            logger.log(`     status code: ${error.response.status}`);
+            logger.log(`[info]   status code: ${error.response.status}`);
             return error.response;
         }
     }
 
     async delete(endpoint, id) {
         try {
-            logger.log(`▶    delete id ${id} in ${endpoint}`);
+            logger.log(`[info] ▶ delete id ${id} in ${endpoint}`);
             const response = await axios.delete(`/${endpoint}`, { params: { id: id } });
-            logger.log(`     status code: ${response.status}`);
+            logger.log(`[info]   status code: ${response.status}`);
             return response;
         } catch (error) {
-            logger.log(`     status code: ${error.response.status}`);
+            logger.log(`[info]   status code: ${error.response.status}`);
             return error.response;
         }
     }

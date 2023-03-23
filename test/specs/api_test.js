@@ -18,8 +18,8 @@ describe('REST API (GET/POST) task', function(){
         assert.equal(response.status, configManager.getStatusCode().code_200, 'status code is not 200');
         assert.equal(response.data.userId, configManager.getTestData().resourceUserId_10, 'userid is not 10');
         assert.equal(response.data.id, configManager.getTestData().resourceId_99, 'id is not 99');
-        assert.notPropertyVal(response.data, configManager.getApiEndpoint().resourceTitle, configManager.getTestData().emptyProperty, 'title is not empty');
-        assert.notPropertyVal(response.data, configManager.getApiEndpoint().resourceBody, configManager.getTestData().emptyProperty, 'body is not empty');
+        assert.isNotEmpty(response.data.title, 'title is not empty');
+        assert.isNotEmpty(response.data.body, 'body is not empty');
 
         response = await jsonplaceholderApi.getPosts(configManager.getTestData().resourceId_150);
         assert.equal(response.status, configManager.getStatusCode().code_404, 'status code is not 404');
@@ -29,7 +29,7 @@ describe('REST API (GET/POST) task', function(){
         response = await jsonplaceholderApi.postPosts(randomPostModel);
         assert.equal(response.status, configManager.getStatusCode().code_201, 'status code is not 201');
         assert.include(response.data, randomPostModel, 'title, body, userid not match data from request');
-        assert.notPropertyVal(response.data, configManager.getApiEndpoint().resourceId, configManager.getTestData().emptyProperty, 'id is not present in response');
+        assert.isNotEmpty((response.data.id).toString(), 'id is not present in response');
 
         response = await jsonplaceholderApi.getUsers();
         assert.equal(response.status, configManager.getStatusCode().code_200, 'status code is not 200');
