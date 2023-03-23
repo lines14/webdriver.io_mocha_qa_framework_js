@@ -20,7 +20,9 @@ class Randomizer {
       
         let randomString = '';
       
-        randomString += chosenLetter;
+        if (chosenLetter !== false) {
+            randomString += chosenLetter;
+        }
       
         let requiredCharacters = '';
         if (hasUpperCase) {
@@ -40,23 +42,22 @@ class Randomizer {
         for (let i = 0; i < randomLength; i++) {
             randomString += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
-    
-        function stringShuffler(inputString) {
-            let array = inputString.split('');
-            let currentIndex = array.length;
-            let temporaryValue;
-            let randomIndex;
-            while (0 !== currentIndex) {
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex--;
-                temporaryValue = array[currentIndex];
-                array[currentIndex] = array[randomIndex];
-                array[randomIndex] = temporaryValue;
-            }
-            return array.join('');
+        return await this.stringShuffler(randomString);
+    }
+
+    async stringShuffler(inputString) {
+        let array = inputString.split('');
+        let currentIndex = array.length;
+        let temporaryValue;
+        let randomIndex;
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
         }
-        
-        return stringShuffler(randomString);
+        return array.join('');
     }
 }
 
