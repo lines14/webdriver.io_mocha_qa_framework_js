@@ -1,7 +1,7 @@
-const ApiTester = require('../../main/framework/api_tester');
+const BaseApi = require('../../main/framework/base_api');
 const configManager = require('../../main/config_manager');
 
-class JsonplaceholderApi extends ApiTester {
+class JsonplaceholderApi extends BaseApi {
     constructor() {
         super(configManager.getConfigData().baseUrl, configManager.getConfigData().timeout);
     }

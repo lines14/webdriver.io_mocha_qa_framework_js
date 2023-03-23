@@ -1,7 +1,7 @@
 const axios = require('axios');
 const logger = require('./logger');
 
-class ApiTester {
+class BaseApi {
     constructor(baseURL, timeout) {
         this.axios = axios;
         logger.log(`[info] ▶ set api url ${baseURL}`);
@@ -70,4 +70,4 @@ class ApiTester {
     }
 }
 
-module.exports = ApiTester;
+module.exports = BaseApi;
