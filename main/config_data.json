@@ -1,4 +1,5 @@
 {
-  "baseUrl": null,
+  "baseUrl": "https://gmail.googleapis.com",
+  "authUrl": "https://oauth2.googleapis.com",
   "timeout": 1000
 }

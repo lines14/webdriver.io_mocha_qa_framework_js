@@ -2,11 +2,12 @@ const axios = require('axios');
 const logger = require('./logger');
 
 class BaseApi {
-    constructor(baseURL, timeout) {
+    constructor(baseURL, log, timeout, headers) {
         this.axios = axios;
-        logger.log(`[info] ▶ set api url ${baseURL}`);
+        logger.log(`${log} ${baseURL}`);
         this.axios.defaults.baseURL = baseURL;
         this.axios.defaults.timeout = timeout;
+        this.axios.defaults.headers = headers;
     }
 
     async get(endpoint) {

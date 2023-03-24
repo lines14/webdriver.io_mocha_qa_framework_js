@@ -1,3 +1,4 @@
 {
-    "template": null
+    "apiToken": "token",
+    "apiMessages": "gmail/v1/users/me/messages"
 }
