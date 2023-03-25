@@ -4,10 +4,10 @@ const configManager = require('../../main/config_manager');
 class GmailApi extends BaseApi {
     constructor(options = {}) {
         super(
-            options.baseURL || configManager.getConfigData().authUrl, 
-            options.log || `[info] ▶ set auth api url`,
+            options.baseURL || configManager.getConfigData().apiBaseUrl, 
             configManager.getConfigData().timeout, 
-            { Authorization: `Bearer ${configManager.getApiToken().access_token}` }
+            { Authorization: `Bearer ${configManager.getApiToken().access_token}` },
+            options.log
             );
     }
 
@@ -16,6 +16,7 @@ class GmailApi extends BaseApi {
     }
 
     async postAuth(model) {
+        new GmailApi({ baseURL: configManager.getConfigData().apiAuthUrl, log: '[info] ▶ set auth api url' });
         const params = { 
             client_id: model.client_id, 
             client_secret: model.client_secret, 
@@ -25,7 +26,7 @@ class GmailApi extends BaseApi {
             refresh_token: model.refresh_token
         }
         const tokenObject = await this.post(configManager.getApiEndpoint().apiToken, params);
-        new GmailApi({baseURL: configManager.getConfigData().baseUrl, log: `[info] ▶ set base api url`});
+        new GmailApi({ baseURL: configManager.getConfigData().apiBaseUrl, log: '[info] ▶ set base api url' });
         return tokenObject;
     }
 }

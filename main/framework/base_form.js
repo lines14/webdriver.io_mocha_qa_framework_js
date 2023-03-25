@@ -1,4 +1,5 @@
 const configManager = require('../config_manager');
+const logger = require('../../main/framework/logger');
 
 class BaseForm {
     constructor(pageLocator, pageName) {
@@ -11,22 +12,22 @@ class BaseForm {
     }
 
     async pageIsDisplayed() {
-        console.log(`▶ ${this.pageName} is open`);
+        logger.log(`[info] ▶ ${this.pageName} is open`);
         return await (await this.getUniqueElement()).isDisplayed();
     }
 
     async pageIsEnabled() {
-        console.log(`▶ ${this.pageName} is enable`);
+        logger.log(`[info] ▶ ${this.pageName} is enable`);
         return await (await this.getUniqueElement()).isEnabled();
     }
 
     async waitPageIsDisplayed() {
-        console.log(`▶ wait ${this.elementName} is open`);
+        logger.log(`[info] ▶ wait ${this.elementName} is open`);
         await (await this.getUniqueElement()).waitForDisplayed({timeout:configManager.getConfigData().waitTime});
     }
     
     async waitPageIsEnabled() {
-        console.log(`▶ wait ${this.elementName} is enable`);
+        logger.log(`[info] ▶ wait ${this.elementName} is enable`);
         await (await this.getUniqueElement()).waitForEnabled({timeout:configManager.getConfigData().waitTime});
     }
 }
