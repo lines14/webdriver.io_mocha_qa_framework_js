@@ -27,6 +27,21 @@ class BaseElement {
         await (await this.getElement()).click();
     }
 
+    async doubleClickElement() {
+        logger.log(`[info] ▶ click ${this.elementName}`);
+        await (await this.getElement()).doubleClick();
+    }
+
+    async clickElementWithMouse() {
+        logger.log(`[info] ▶ click ${this.elementName}`);
+        await browser.action('pointer').move({ duration: 0, origin: (await this.getElement()) }).down({ button: 0 }).up({ button: 0 }).perform();
+    }
+
+    async scrollToElement() {
+        logger.log(`[info] ▶ scroll to ${this.elementName}`);
+        await (await this.getElement()).scrollIntoView();
+    }
+
     async clickElementFromList(index) {
         logger.log(`[info] ▶ click element from ${this.elementName}`);
         await ((await this.getElements())[index]).click();

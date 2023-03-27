@@ -11,6 +11,7 @@ class NewslettersPage extends BaseForm {
         this.specialCoverageButton = new Button('//h2[text()="Special Coverage"]//ancestor::div[@class="p-8"]//following-sibling::label[contains(text(), "Choose this newsletter")]', '"special coverage" subscription button');
         this.emailBox = new TextBox('//input[@placeholder="Enter your email"]', 'email box');
         this.submitButton = new Button('//input[@type="submit"]', 'submit button');
+        this.newslettersHeading = new Label('//span[contains(text(), "Our newsletters")]', 'heading of the "newsletters" page');
         this.confirmationForm = new Label('//span[contains(text(), "Thanks! To complete your subscription")]', '"confirmation request" form');
         this.allSeePreviewsButtons = new Button('//form[@id="newsletters-form"]//following-sibling::a[contains(@class, "text-primary")]', 'all "see previews" buttons');
         this.allPreviewsIframes = new Label('//iframe[@class="iframe-preview"]', 'all previews iframes');
@@ -20,12 +21,20 @@ class NewslettersPage extends BaseForm {
         this.element = await this.allSubscriptionButtons.clickRandomElementsFromList(this.specialCoverageButton.elementLocator);
     }
 
+    async waitSubmitButtonClickable() {
+        await this.submitButton.waitIsClickable();
+    }
+
     async emailBoxDisplayedInViewport() {
         return await this.emailBox.elementIsDisplayedInViewport();
     }
 
     async inputEmail() {
         await this.emailBox.inputData(configManager.getTestData().email);
+    }
+
+    async scrollToHeading() {
+        await this.newslettersHeading.scrollToElement();
     }
 
     async clickSubmitButton() {

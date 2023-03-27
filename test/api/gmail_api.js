@@ -1,33 +1,53 @@
 const BaseApi = require('../../main/framework/base_api');
 const configManager = require('../../main/config_manager');
+const logger = require('../../main/framework/logger');
 
 class GmailApi extends BaseApi {
     constructor(options = {}) {
         super(
-            options.baseURL || configManager.getConfigData().apiBaseUrl, 
-            configManager.getConfigData().timeout, 
-            { Authorization: `Bearer ${configManager.getApiToken().access_token}` },
-            options.log
+            options.baseURL || configManager.getApiConfigData().apiBaseUrl,
+            options.log || '[info] ▶ set base api url',
+            configManager.getConfigData().waitTime, 
+            { Authorization: `Bearer ${process.env.ACCESS_TOKEN || ''}` }
             );
     }
 
     async getMessages(id) {
+        await new Promise(resolve => setTimeout(resolve, configManager.getApiConfigData().apiTimeout));
         return id ? await this.get(`${configManager.getApiEndpoint().apiMessages}/${id}`) : await this.get(configManager.getApiEndpoint().apiMessages);
     }
 
-    async postAuth(model) {
-        new GmailApi({ baseURL: configManager.getConfigData().apiAuthUrl, log: '[info] ▶ set auth api url' });
-        const params = { 
-            client_id: model.client_id, 
-            client_secret: model.client_secret, 
-            code: model.code, 
-            grant_type: model.grant_type,
-            redirect_uri: model.redirect_uri,
-            refresh_token: model.refresh_token
+    async getMessagesCount() {
+        logger.log('[info] ▶ get messages count:');
+        this.messagesPrecount = ((await this.getMessages()).data.messages).length;
+        return this.messagesPrecount;
+    }
+
+    async waitMessagesCountIncrement() {
+        let counter = 0;
+        let messagesCount = this.messagesPrecount;
+        logger.log(`[info] ▶ wait incoming message:`);
+
+        while (counter < configManager.getApiConfigData().apiRequestsLimit) {
+            messagesCount = ((await this.getMessages()).data.messages).length;
+            if (messagesCount > this.messagesPrecount) {
+                break;
+            }
+            counter++;
         }
-        const tokenObject = await this.post(configManager.getApiEndpoint().apiToken, params);
-        new GmailApi({ baseURL: configManager.getConfigData().apiBaseUrl, log: '[info] ▶ set base api url' });
-        return tokenObject;
+        messagesCount > this.messagesPrecount ? logger.log('[info] ▶ successfully receive message') : logger.log('[info] ▶ message is not received');
+        return messagesCount;
+    }
+
+    async refreshToken() {
+        new GmailApi({ baseURL: configManager.getApiConfigData().apiAuthUrl, log: '[info] ▶ set auth api url' });
+        const params = { 
+            client_id: process.env.CLIENT_ID || '', 
+            client_secret: process.env.CLIENT_SECRET || '', 
+            grant_type: process.env.GRANT_TYPE || '',
+            refresh_token: process.env.REFRESH_TOKEN || ''
+        }
+        return await this.post(configManager.getApiEndpoint().apiToken, params);
     }
 }
 

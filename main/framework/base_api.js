@@ -2,7 +2,7 @@ const axios = require('axios');
 const logger = require('./logger');
 
 class BaseApi {
-    constructor(baseURL, timeout, headers, log) {
+    constructor(baseURL, log, timeout, headers) {
         this.axios = axios;
         log ? logger.log(`${log} ${baseURL}`) : log;
         this.axios.defaults.baseURL = baseURL;

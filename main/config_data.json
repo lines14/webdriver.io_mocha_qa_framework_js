@@ -1,7 +1,5 @@
 {
   "baseUrl": "https://euronews.com",
-  "apiBaseUrl": "https://gmail.googleapis.com",
-  "apiAuthUrl": "https://oauth2.googleapis.com",
   "htmlFromMessage": "../index.html",
-  "timeout": 1000
+  "waitTime": 15000
 }

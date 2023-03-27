@@ -14,7 +14,6 @@ const path = require("path");
 
 describe('Gmail API Euronews (API + WEB) task', function(){    
     before(async function() {
-        await gmailApiUtils.refreshToken();
         await browserUtils.configureBrowserLogger();
     });
 
@@ -27,13 +26,15 @@ describe('Gmail API Euronews (API + WEB) task', function(){
         assert.isTrue(await newslettersPage.pageIsDisplayed(), 'page "newsletters" is not opened');
 
         await newslettersPage.clickRandomSubscriptionButton();
+        await newslettersPage.scrollToHeading();
+        await newslettersPage.waitSubmitButtonClickable();
         assert.isTrue(await newslettersPage.emailBoxDisplayedInViewport(), 'an email form has not appeared at the bottom of the page');
 
-        let messagesCount = await gmailApiUtils.getMessagesCount();
+        let messagesCount = await gmailApi.getMessagesCount();
         await newslettersPage.inputEmail();
         await newslettersPage.clickSubmitButton();
         await newslettersPage.waitConfirmationFormClickable();
-        assert.isAbove(await gmailApiUtils.waitMessagesCountIncrement(), messagesCount, 'you have not received an email with a request to confirm your subscription');
+        assert.isAbove(await gmailApi.waitMessagesCountIncrement(), messagesCount, 'you have not received an email with a request to confirm your subscription');
 
         const newestMessage = ((await gmailApi.getMessages()).data.messages).shift();
         await gmailApiUtils.saveHTML((await gmailApi.getMessages(newestMessage.id)).data.payload.parts.shift());
@@ -53,11 +54,11 @@ describe('Gmail API Euronews (API + WEB) task', function(){
         await browser.url(await previewIframe.getUnsubscribeLinkValue());
         assert.isTrue(await unsubscribePage.pageIsDisplayed(), 'unsubscribe page is not opened');
 
-        messagesCount = await gmailApiUtils.getMessagesCount();
+        messagesCount = await gmailApi.getMessagesCount();
         await unsubscribePage.inputEmail();
         await unsubscribePage.clickSubmitButton();
         assert.isTrue(await unsubscribePage.unsubscribeConfirmTextExisting(), 'a message that the subscription was canceled not appears');
-        assert.equal(await gmailApiUtils.waitMessagesCountIncrement(), messagesCount, 'the letter has arrived');
+        assert.equal(await gmailApi.waitMessagesCountIncrement(), messagesCount, 'the letter has arrived');
     });
 
     after(async function() {

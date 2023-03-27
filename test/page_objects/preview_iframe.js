@@ -4,8 +4,8 @@ const configManager = require('../../main/config_manager');
 
 class PreviewIframe extends BaseForm {
     constructor() {
-        super('//a[contains(text(), "this email forwarded to you")]', '"preview" iframe');
-        this.unsubscribeLink = new Label('//a[text()="unsubscribe by clicking here"]', 'unsubscribe link');
+        super('//a[contains(@href, "https://www.euronews.com")]', '"preview" iframe');
+        this.unsubscribeLink = new Label('//a[contains(@href, "https://services.ownpage.fr/unsubscribe")]', 'unsubscribe link');
     }
 
     async getUnsubscribeLinkValue() {

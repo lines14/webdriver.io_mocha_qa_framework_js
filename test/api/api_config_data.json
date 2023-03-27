@@ -1,0 +1,6 @@
+{
+    "apiBaseUrl": "https://gmail.googleapis.com",
+    "apiAuthUrl": "https://oauth2.googleapis.com",
+    "apiTimeout": 1500,
+    "apiRequestsLimit": 5
+}
