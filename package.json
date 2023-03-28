@@ -10,6 +10,7 @@
     "chai-sorted": "^0.2.0",
     "chromedriver": "^111.0.0",
     "moment": "^2.29.4",
+    "mysql2": "^3.2.0",
     "wdio-chromedriver-service": "^8.1.1"
   },
   "scripts": {
