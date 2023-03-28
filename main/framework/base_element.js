@@ -1,5 +1,6 @@
 const randomizer = require('../../main/framework/randomizer');
 const configManager = require('../config_manager');
+const logger = require('../../main/framework/logger');
 
 class BaseElement {
     constructor(elementLocator, elementName) {
@@ -16,69 +17,100 @@ class BaseElement {
     }
 
     async getText() {
-        console.log(`▶ get ${this.elementName} text:`);
-        console.log(`▶ text contains: "${(await (await this.getElement()).getText())}"`);
+        logger.log(`[info] ▶ get ${this.elementName} text:`);
+        logger.log(`[info]   text contains: "${(await (await this.getElement()).getText())}"`);
         return await (await this.getElement()).getText();
     }
 
     async clickElement() {
-        console.log(`▶ click ${this.elementName}`);
+        logger.log(`[info] ▶ click ${this.elementName}`);
         await (await this.getElement()).click();
     }
 
+    async doubleClickElement() {
+        logger.log(`[info] ▶ click ${this.elementName}`);
+        await (await this.getElement()).doubleClick();
+    }
+
+    async clickElementWithMouse() {
+        logger.log(`[info] ▶ click ${this.elementName}`);
+        await browser.action('pointer').move({ duration: 0, origin: (await this.getElement()) }).down({ button: 0 }).up({ button: 0 }).perform();
+    }
+
+    async scrollToElement() {
+        logger.log(`[info] ▶ scroll to ${this.elementName}`);
+        await (await this.getElement()).scrollIntoView();
+    }
+
+    async clickElementFromList(index) {
+        logger.log(`[info] ▶ click element from ${this.elementName}`);
+        await ((await this.getElements())[index]).click();
+    }
+
     async inputData(data) {
-        console.log(`▶ input ${this.elementName}`);
+        logger.log(`[info] ▶ input ${this.elementName}`);
         await (await this.getElement()).setValue(data);
     }
 
     async enterData(data) {
-        console.log(`▶ input ${this.elementName} and submit`);
+        logger.log(`[info] ▶ input ${this.elementName} and submit`);
         await (await this.getElement()).setValue(data);
         await browser.keys('enter');
     }
 
     async getAttributeValue(attr) {
-        console.log(`▶ get ${this.elementName} attribute value`);
+        logger.log(`[info] ▶ get ${this.elementName} attribute value`);
         return (await this.getElement()).getAttribute(attr);
     }
 
     async elementIsDisplayed() {
-        console.log(`▶ check ${this.elementName} is present:`);
-        console.log(await (await this.getElement()).isDisplayed() ? `▶ ${this.elementName} is present` : `▶ ${this.elementName} is not present`);
+        logger.log(`[info] ▶ check ${this.elementName} is present:`);
+        logger.log(await (await this.getElement()).isDisplayed() ? `[info]   ${this.elementName} is present` : `[info]   ${this.elementName} is not present`);
         return await (await this.getElement()).isDisplayed();
     }
 
+    async elementIsDisplayedInViewport() {
+        logger.log(`[info] ▶ check ${this.elementName} is present in viewport:`);
+        logger.log(await (await this.getElement()).isDisplayedInViewport() ? `[info]   ${this.elementName} is present in viewport` : `[info]   ${this.elementName} is not present in viewport`);
+        return await (await this.getElement()).isDisplayedInViewport();
+    }
+
     async elementIsClickable() {
-        console.log(`▶ check ${this.elementName} is clickable:`);
-        console.log(await (await this.getElement()).isClickable() ? `▶ ${this.elementName} is clickable` : `▶ ${this.elementName} is not clickable`);
+        logger.log(`[info] ▶ check ${this.elementName} is clickable:`);
+        logger.log(await (await this.getElement()).isClickable() ? `[info]   ${this.elementName} is clickable` : `[info]   ${this.elementName} is not clickable`);
         return await (await this.getElement()).isClickable();
     }
 
     async elementIsExisting() {
-        console.log(`▶ check ${this.elementName} is exists:`);
-        console.log(await (await this.getElement()).isExisting() ? `▶ ${this.elementName} is exists` : `▶ ${this.elementName} is not exists`);
+        logger.log(`[info] ▶ check ${this.elementName} is exists:`);
+        logger.log(await (await this.getElement()).isExisting() ? `[info]   ${this.elementName} is exists` : `[info]   ${this.elementName} is not exists`);
         return await (await this.getElement()).isExisting();
     }
 
     async elementIsEnabled() {
-        console.log(`▶ check ${this.elementName} is enable:`);
-        console.log(await (await this.getElement()).isEnabled() ? `▶ ${this.elementName} is enable` : `▶ ${this.elementName} is not enable`);
+        logger.log(`[info] ▶ check ${this.elementName} is enable:`);
+        logger.log(await (await this.getElement()).isEnabled() ? `[info]   ${this.elementName} is enable` : `[info]   ${this.elementName} is not enable`);
         return await (await this.getElement()).isEnabled();
     }
 
     async waitIsClickable() {
-        console.log(`▶ wait ${this.elementName} is clickable`);
+        logger.log(`[info] ▶ wait ${this.elementName} is clickable`);
         await (await this.getElement()).waitForClickable({timeout:configManager.getConfigData().waitTime});
     }
 
     async waitIsNotClickable() {
-        console.log(`▶ wait ${this.elementName} is not clickable`);
+        logger.log(`[info] ▶ wait ${this.elementName} is not clickable`);
         await (await this.getElement()).waitForClickable({timeout:configManager.getConfigData().waitTime, reverse:true});
     }
     
     async waitIsEnabled() {
-        console.log(`▶ wait ${this.elementName} is enable`);
+        logger.log(`[info] ▶ wait ${this.elementName} is enable`);
         await (await this.getElement()).waitForEnabled({timeout:configManager.getConfigData().waitTime});
+    }
+
+    async waitIsExisting() {
+        logger.log(`[info] ▶ wait ${this.elementName} is exists`);
+        await (await this.getElement()).waitForExist({timeout:configManager.getConfigData().waitTime});
     }
 
     async clickRandomElementsFromList(...args) {
@@ -98,10 +130,11 @@ class BaseElement {
         }
 
         for (let counter = 0; counter < count; counter++) {
-            console.log(`▶ click random element from ${this.elementName}`);
+            logger.log(`[info] ▶ click random element from ${this.elementName}`);
             const randomElement = await randomizer.getRandomElement(await this.getElements(), exceptionsList);
-            await browser.action('pointer').move({ duration: 0, origin: randomElement }).down({ button: 0 }).up({ button: 0 }).perform();
+            await randomElement.click();
             exceptionsList.push(randomElement);
+            return randomElement;
         }
     }
 }

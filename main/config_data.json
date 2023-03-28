@@ -1,4 +1,4 @@
 {
   "baseUrl": null,
-  "timeout": 1000
+  "waitTime": 15000
 }
