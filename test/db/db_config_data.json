@@ -1,0 +1,12 @@
+{
+    "dbProjectName": "task_database",
+    "dbAuthorName": "alipatov",
+    "dbAuthorLogin": "lines14",
+    "dbAuthorEmail": "lines14.qa@gmail.com",
+    "testName": "verify that cookies form can be closed",
+    "method_name": "functional testing",
+    "project_id": "get from project table",
+    "browser": "get from wdio",
+    "env": "alipatov",
+    "author_id": "get from author table"
+}

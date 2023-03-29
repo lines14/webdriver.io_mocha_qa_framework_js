@@ -3,6 +3,8 @@ const testData = require('../test/test_data.json');
 const statusCode = require('./framework/api_codes.json');
 const apiEndpoint = require('../test/api/api_endpoints.json');
 const apiConfigData = require('../test/api/api_config_data.json');
+const databaseConfigData = require('../test/db/db_config_data.json');
+const databaseEndpoint = require('../test/db/db_endpoints.json');
 const path = require("path");
 
 class ConfigManager {
@@ -28,6 +30,14 @@ class ConfigManager {
 
     getApiConfigData() {
         return JSON.parse(JSON.stringify(apiConfigData));
+    }
+
+    getDatabaseConfigData() {
+        return JSON.parse(JSON.stringify(databaseConfigData));
+    }
+
+    getDatabaseEndpoint() {
+        return JSON.parse(JSON.stringify(databaseEndpoint));
     }
 }
 

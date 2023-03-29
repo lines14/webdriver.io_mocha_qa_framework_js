@@ -4,13 +4,15 @@ const homePage = require('../page_objects/home_page');
 const signInForm = require('../page_objects/sign_in_form');
 const logger = require('../../main/framework/logger');
 const browserUtils = require('../../main/framework/browser_utils');
+const unionReportingDatabase = require('../db/union_reporting_database');
 
-describe('Userinterface task', function(){
+describe('Database task', function(){
     before(async function() {
+        await unionReportingDatabase.writeProjectAndAuthor();
         await browserUtils.configureBrowserLogger();
     });
     
-    it('Test case 3', async function() {
+    it('Test case 1', async function() {
         await browser.url(configManager.getConfigData().url);
         assert.isTrue(await homePage.pageIsDisplayed(), 'welcome page is not open');
 
@@ -22,6 +24,7 @@ describe('Userinterface task', function(){
     });
 
     after(async function() {
+        await unionReportingDatabase.writeTestResult(this.currentTest.state);
         await logger.logToFile();
     });
 });

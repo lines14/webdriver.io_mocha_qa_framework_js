@@ -1,24 +1,19 @@
-const { assert } = require("chai");
-const configManager = require('../../main/config_manager');
-const homePage = require('../page_objects/home_page');
-const signInForm = require('../page_objects/sign_in_form');
+const unionReportingDatabase = require('../db/union_reporting_database');
 const logger = require('../../main/framework/logger');
-const browserUtils = require('../../main/framework/browser_utils');
 
-describe('Userinterface task', function(){
+describe('Database task', function(){
+    let tests;
     before(async function() {
-        await browserUtils.configureBrowserLogger();
+        await unionReportingDatabase.writeProjectAndAuthor();
+        tests = await unionReportingDatabase.cloneRandomTests(await unionReportingDatabase.getRandomTests());
     });
     
-    it('Test case 4', async function() {
-        await browser.url(configManager.getConfigData().url);
-        await homePage.pageIsDisplayed();
-        await homePage.clickLink();
-        await signInForm.pageIsDisplayed();
-        assert.equal(await signInForm.getTimerText(), configManager.getTestData().timerValue, 'timer starts not from "00:00"');
+    it('Test case 2', async function() {
+        await unionReportingDatabase.simulateTests(tests);
     });
 
     after(async function() {
+        await unionReportingDatabase.deleteTests();
         await logger.logToFile();
     });
 });
