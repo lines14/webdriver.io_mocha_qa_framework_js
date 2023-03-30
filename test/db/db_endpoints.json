@@ -1,9 +1,0 @@
-{
-    "dbTestTable": "test",
-    "dbProjectTable": "project",
-    "dbAuthorTable": "author",
-    "dbStatusTable": "status",
-    "dbIdColumn": "id",
-    "dbNameColumn": "name",
-    "dbAuthorIdColumn": "author_id"
-}

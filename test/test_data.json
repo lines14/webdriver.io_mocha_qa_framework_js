@@ -1,6 +1,7 @@
 {
   "timerValue": "00:00:00",
   "maxSessionsCount": 20,
-  "maxRandomTestsCount": 5,
-  "maxStatusTestsCount": 3
+  "maxRandomTestsCount": 10,
+  "maxStatusTestsCount": 3,
+  "listOfDoubleDigits": [11, 22, 33, 44, 55, 66, 77, 88, 99]
 }

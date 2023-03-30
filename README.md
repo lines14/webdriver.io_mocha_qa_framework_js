@@ -1,10 +1,10 @@
 # a.lipatov
 \
 To configure database connection:\
-&emsp;set up environment variables:\
-&emsp;&emsp;DB_HOST=\
-&emsp;&emsp;DB_USER=\
-&emsp;&emsp;DB_PASSWORD=\
-&emsp;&emsp;DB_DATABASE=\
+&emsp;set up credentials in db_config_data.json:\
+&emsp;&emsp;dbHost:\
+&emsp;&emsp;dbUser:\
+&emsp;&emsp;dbPassword:\
+&emsp;&emsp;dbDatabase:\
 \
-Or you may input all credentials in database_utils.js instead of creating environment variables
+Or you may input all credentials in union_reporting_database.js

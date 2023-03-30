@@ -4,15 +4,15 @@ const logger = require('../../main/framework/logger');
 const { config } = require('../../wdio.chrome.conf');
 const randomizer = require('../../main/framework/randomizer');
 const moment = require('moment');
-const listOfIdentifiers = new Array();
+const listToUpdate = new Array();
 
 class UnionReportingDatabase extends DatabaseUtils {
     constructor() {
         super(
-            process.env.DB_HOST || '',
-            process.env.DB_USER || '',
-            process.env.DB_PASSWORD || '',
-            process.env.DB_DATABASE || ''
+            configManager.getDatabaseConfigData().dbHost || 'localhost',
+            configManager.getDatabaseConfigData().dbUser || 'admin_db',
+            configManager.getDatabaseConfigData().dbPassword || '106107',
+            configManager.getDatabaseConfigData().dbDatabase || 'union_reporting'
             );
     }
 
@@ -27,26 +27,16 @@ class UnionReportingDatabase extends DatabaseUtils {
             email: configManager.getDatabaseConfigData().dbAuthorEmail
         }
 
-        await this.sqlRefresh(configManager.getDatabaseEndpoint().dbProjectTable, projectObject);
-        await this.sqlRefresh(configManager.getDatabaseEndpoint().dbAuthorTable, authorObject);
+        await this.sqlRefresh('project', projectObject);
+        await this.sqlRefresh('author', authorObject);
     }
 
     async getProjectId() {
-        return (await this.sqlGet(
-            configManager.getDatabaseEndpoint().dbProjectTable, 
-            `\`${configManager.getDatabaseEndpoint().dbNameColumn}\` = ?`,
-            [configManager.getDatabaseConfigData().dbProjectName], 
-            configManager.getDatabaseEndpoint().dbIdColumn
-            )).pop().id
+        return (await this.sqlGet('project', 'id', 'WHERE `name` = ?', [configManager.getDatabaseConfigData().dbProjectName])).pop().id
     }
 
     async getAuthorId() {
-        return (await this.sqlGet(
-            configManager.getDatabaseEndpoint().dbAuthorTable, 
-            `\`${configManager.getDatabaseEndpoint().dbNameColumn}\` = ?`,
-            [configManager.getDatabaseConfigData().dbAuthorName], 
-            configManager.getDatabaseEndpoint().dbIdColumn
-            )).pop().id
+        return (await this.sqlGet('author', 'id', 'WHERE `name` = ?', [configManager.getDatabaseConfigData().dbAuthorName])).pop().id
     }
 
     async writeTestResult(state) {
@@ -60,33 +50,27 @@ class UnionReportingDatabase extends DatabaseUtils {
             browser: config.capabilities.pop().browserName,
             project_id: await this.getProjectId(),
             author_id: await this.getAuthorId(),
-
-            status_id: (await this.sqlGet(
-                configManager.getDatabaseEndpoint().dbStatusTable, 
-                `\`${configManager.getDatabaseEndpoint().dbNameColumn}\` = ?`,
-                [state.toUpperCase()], 
-                configManager.getDatabaseEndpoint().dbIdColumn
-                )).pop().id,
+            status_id: (await this.sqlGet('status', 'id', 'WHERE `name` = ?', [state.toUpperCase()])).pop().id,
         }
 
-        await this.sqlAdd(configManager.getDatabaseEndpoint().dbTestTable, testObject);
+        await this.sqlAdd('test', testObject);
     }
 
     async getRandomTests() {
-        const setOfDigits = new Set();
-        for (let i = 0; setOfDigits.size < configManager.getTestData().maxRandomTestsCount; i++) {
-            setOfDigits.add(await randomizer.getRandomNumber());
+        const listOfIdentifiers = await this.sqlGet('test', 'id', 'ORDER BY id ASC');
+        const setOfIdentifiers = new Set();
+
+        for (let i = 0; setOfIdentifiers.size < configManager.getTestData().maxRandomTestsCount; i++) {
+            const sortedId = (listOfIdentifiers[i]).id;
+
+            (configManager.getTestData().listOfDoubleDigits).map(function(element) {
+                if ((sortedId.toString()).includes(element.toString())) {
+                    setOfIdentifiers.add(sortedId);
+                }
+            });
         }
 
-        const listOfValues = (Array.from(setOfDigits)).map(element => [Number(element.toString() + element.toString())]);
-        const conditions = `\`${configManager.getDatabaseEndpoint().dbIdColumn}\` = ?`;
-
-        const listOfTests = new Array();
-        for (let i = 0; i < configManager.getTestData().maxRandomTestsCount; i++) {
-            listOfTests.push(await this.sqlGet(configManager.getDatabaseEndpoint().dbTestTable, conditions, listOfValues[i]));
-        }
-
-        return listOfTests;
+        return Promise.all((Array.from(setOfIdentifiers)).map(async (element) => await this.sqlGet('test', '*', 'WHERE `id` = ?', [element])));
     }
 
     async cloneRandomTests(listOfTests) {
@@ -101,8 +85,8 @@ class UnionReportingDatabase extends DatabaseUtils {
             delete testObject["id"];
             updatedTests.push(testObject);
 
-            const info = await this.sqlAdd(configManager.getDatabaseEndpoint().dbTestTable, testObject);
-            listOfIdentifiers.push(info.insertId);
+            const info = await this.sqlAdd('test', testObject);
+            listToUpdate.push(info.insertId);
         }
 
         return updatedTests;
@@ -112,21 +96,18 @@ class UnionReportingDatabase extends DatabaseUtils {
         for (let i = 0; i < listOfTests.length; i++) {
             logger.log(`[info] ▶ run test ${i}`);
             const testObject = listOfTests[i];
-            testObject["id"] = listOfIdentifiers[i];
+            testObject["id"] = listToUpdate[i];
             testObject["start_time"] = moment().format().slice(0, 19).replace('T', ' ');
             await new Promise(resolve => setTimeout(resolve, configManager.getConfigData().waitTime));
             testObject["end_time"] = moment().format().slice(0, 19).replace('T', ' ');
             testObject["status_id"] = await randomizer.getRandomNumber(configManager.getTestData().maxStatusTestsCount);
 
-            await this.sqlRefresh(configManager.getDatabaseEndpoint().dbTestTable, testObject);
+            await this.sqlRefresh('test', testObject);
         }
     }
 
     async deleteTests() {
-        const conditions = `\`${configManager.getDatabaseEndpoint().dbAuthorIdColumn}\` = ?`
-        const values = [await this.getAuthorId()];
-
-        await this.sqlDelete(configManager.getDatabaseEndpoint().dbTestTable, conditions, values);
+        await this.sqlDelete('test', 'WHERE `author_id` = ?', [await this.getAuthorId()]);
     }
 }
 

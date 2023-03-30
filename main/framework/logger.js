@@ -23,7 +23,8 @@ class Logger {
     }
 
     async getTimings() {
-        return timeList;
+        const timingsList = JSON.parse(JSON.stringify(timeList));
+        return timingsList;
     }
 }
 

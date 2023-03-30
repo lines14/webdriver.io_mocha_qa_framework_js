@@ -25,6 +25,7 @@ describe('Database task', function(){
 
     after(async function() {
         await unionReportingDatabase.writeTestResult(this.currentTest.state);
+        await unionReportingDatabase.closeConnection();
         await logger.logToFile();
     });
 });

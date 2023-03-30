@@ -12,18 +12,23 @@ class DatabaseUtils {
         }).then(conn => this.connection = conn);
     }
 
+    async closeConnection() {
+        logger.log(`[info] ▶ close connection to database`);
+        await this.connection.end();
+    }
+
     async sqlQuery(query, values, log) {
         logger.log(log);
         const [rows] = await this.connection.query(query, [values]);
         return rows;
     }
 
-    async sqlGet(tableName, conditions, valuesArray, target='*') {
-        const values = valuesArray;
+    async sqlGet(tableName, target='*', conditions='', values=[]) {
+        const valuesArray = values;
         const log = `[info] ▶ select data from ${tableName} table`;
-        const query =`SELECT ${target} FROM ${tableName} WHERE ${conditions};`;
+        const query =`SELECT ${target} FROM ${tableName} ${conditions};`;
 
-        return await this.sqlQuery(query, values, log);
+        return await this.sqlQuery(query, valuesArray, log);
     }
 
     async sqlAdd(tableName, dataObject) {
@@ -44,20 +49,20 @@ class DatabaseUtils {
         await this.sqlQuery(query, values, log);
     }
 
-    async sqlDelete(tableName, conditions, valuesArray) {
-        const values = valuesArray;
+    async sqlDelete(tableName, conditions='', values=[]) {
+        const valuesArray = values;
         const log = `[info] ▶ delete data from ${tableName} table`;
-        const query =`DELETE FROM ${tableName} WHERE ${conditions};`;
+        const query =`DELETE FROM ${tableName} ${conditions};`;
 
-        await this.sqlQuery(query, values, log);
+        await this.sqlQuery(query, valuesArray, log);
     }
 
-    async sqlEdit(tableName, conditions, valuesArray, target) {
-        const values = valuesArray;
+    async sqlEdit(tableName, target='*', conditions='', values=[]) {
+        const valuesArray = values;
         const log = `[info] ▶ update data in ${tableName} table`;
-        const query =`UPDATE ${tableName} SET ${target} WHERE ${conditions};`;
+        const query =`UPDATE ${tableName} SET ${target} ${conditions};`;
 
-        await this.sqlQuery(query, values, log);
+        await this.sqlQuery(query, valuesArray, log);
     }
 }
 
