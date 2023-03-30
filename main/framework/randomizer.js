@@ -16,7 +16,7 @@ class Randomizer {
         const numbers = '0123456789';
         const cyrillicLetters = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя';
       
-        let length = Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength;
+        let length = await this.getRandomNumber(minLength, maxLength);
       
         let randomString = '';
       
@@ -43,6 +43,10 @@ class Randomizer {
             randomString += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
         return await this.stringShuffler(randomString);
+    }
+
+    async getRandomNumber(maxLength=9, minLength=1) {
+        return Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength;
     }
 
     async stringShuffler(inputString) {

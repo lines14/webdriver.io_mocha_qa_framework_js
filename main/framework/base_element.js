@@ -124,7 +124,7 @@ class BaseElement {
             exceptionsLocators = args.slice(0, args.length);
         }
 
-        const exceptionsList = [];
+        const exceptionsList = new Array();
         for (let counter = 0; counter < exceptionsLocators.length; counter++) {
             exceptionsList.push(await $(exceptionsLocators[counter]));
         }

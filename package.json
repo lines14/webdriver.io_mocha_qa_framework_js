@@ -10,10 +10,11 @@
     "chai-sorted": "^0.2.0",
     "chromedriver": "^111.0.0",
     "moment": "^2.29.4",
+    "mysql2": "^3.2.0",
     "wdio-chromedriver-service": "^8.1.1"
   },
   "scripts": {
     "wdio": "wdio run ./wdio.chrome.conf.js",
-    "test": "node_modules/.bin/mocha test/specs/test.js --timeout 60000"
+    "test": "node_modules/.bin/mocha test/specs/test2.js --timeout 60000"
   }
 }
