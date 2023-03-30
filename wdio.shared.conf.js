@@ -22,7 +22,7 @@ exports.config = {
         ['junit', {
             outputDir: './',
             outputFileFormat: function(options) { // optional
-                return `results-${options.cid}.${options.capabilities}.xml`
+                return `jenkins-test-results.xml`
             }
         }]
     ],

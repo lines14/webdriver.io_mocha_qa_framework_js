@@ -9,10 +9,10 @@ const listToUpdate = new Array();
 class UnionReportingDatabase extends DatabaseUtils {
     constructor() {
         super(
-            configManager.getDatabaseConfigData().dbHost || 'localhost',
-            configManager.getDatabaseConfigData().dbUser || 'admin_db',
-            configManager.getDatabaseConfigData().dbPassword || '106107',
-            configManager.getDatabaseConfigData().dbDatabase || 'union_reporting'
+            configManager.getDatabaseConfigData().dbHost || '',
+            configManager.getDatabaseConfigData().dbUser || '',
+            configManager.getDatabaseConfigData().dbPassword || '',
+            configManager.getDatabaseConfigData().dbDatabase || ''
             );
     }
 
