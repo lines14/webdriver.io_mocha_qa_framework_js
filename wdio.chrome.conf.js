@@ -8,7 +8,7 @@ exports.config = {
                 browserName: 'chrome',
                 acceptInsecureCerts: true,
                 "goog:chromeOptions": {
-                    args: ['--incognito', '--start-maximized']
+                    args: ['--no-sandbox', '--disable-dev-shm-usage', '--incognito', 'headless', '--start-maximized']
                 }
             }
         ],
