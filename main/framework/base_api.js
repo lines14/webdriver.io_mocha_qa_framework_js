@@ -1,5 +1,6 @@
 const axios = require('axios');
 const logger = require('./logger');
+const qs = require('qs');
 
 class BaseApi {
     constructor(baseURL, log, timeout, headers) {
@@ -25,7 +26,7 @@ class BaseApi {
     async post(endpoint, params) {
         try {
             logger.log(`[info] ▶ post ${JSON.stringify(params)} to ${endpoint}:`);
-            const response = await axios.post(`/${endpoint}`, params);
+            const response = await axios.post(`/${endpoint}`, qs.stringify(params));
             logger.log(`[info]   status code: ${response.status}`);
             return response;
         } catch (error) {
