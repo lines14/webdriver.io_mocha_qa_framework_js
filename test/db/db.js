@@ -1,8 +1,8 @@
-const DatabaseUtils = require('../../main/framework/database_utils');
-const configManager = require('../../main/config_manager');
-const logger = require('../../main/framework/logger');
+const DatabaseUtils = require('../../main/utils/db/database_utils');
+const configManager = require('../../main/utils/data/config_manager');
+const logger = require('../../main/utils/log/logger');
 const { config } = require('../../wdio.chrome.conf');
-const randomizer = require('../../main/framework/randomizer');
+const randomizer = require('../../main/utils/random/randomizer');
 
 class UnionReportingDatabase extends DatabaseUtils {
     constructor() {

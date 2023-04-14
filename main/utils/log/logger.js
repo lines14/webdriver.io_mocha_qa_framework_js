@@ -1,6 +1,6 @@
 const path = require("path");
-const timeList = new Array();
-const logList = new Array();
+const timeList = [];
+const logList = [];
 const fs = require('fs');
 const moment = require('moment');
 
@@ -23,8 +23,7 @@ class Logger {
     }
 
     async getTimings() {
-        const timingsList = JSON.parse(JSON.stringify(timeList));
-        return timingsList;
+        return Object.assign([], timeList);
     }
 }
 

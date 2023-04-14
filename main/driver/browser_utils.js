@@ -1,7 +1,12 @@
-const logger = require('../../main/framework/logger');
+const logger = require('../utils/log/logger');
+const configManager = require('../utils/data/config_manager');
 
 class BrowserUtils {
-    async configureBrowserLogger() {
+    async configureBrowserCommands() {
+        if (configManager.getConfigData().isMaximize) {
+            await browser.maximizeWindow();
+        }
+
         await browser.overwriteCommand('url', function (newUrl, urlValue) {
             logger.log(`[info] ▶ open url ${urlValue}`);
             newUrl(urlValue);

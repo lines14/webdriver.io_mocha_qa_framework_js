@@ -5,15 +5,15 @@ exports.config = {
     ...{
         capabilities: [
             {
-                browserName: 'firefox',
+                browserName: 'chrome',
                 acceptInsecureCerts: true,
-                "moz:firefoxOptions": {
-                    args: ['-private']
+                "goog:chromeOptions": {
+                    args: ['--incognito', '--start-maximized']
                 }
             }
         ],
         services: [
-            'geckodriver'
+            'chromedriver'
         ]
     }
 }

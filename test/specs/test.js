@@ -1,20 +1,12 @@
 const { assert } = require("chai");
-const logger = require('../../main/framework/logger');
-const browserUtils = require('../../main/framework/browser_utils');
-const database = require('../db/database');
+const database = require('../db/db');
 
-describe('Database task', function(){
-    before(async function() {
-        await browserUtils.configureBrowserLogger();
-    });
-    
-    it('Test case 1', async function() {
+describe('Test suite', function(){    
+    it('Test case', async function() {
         
     });
 
     after(async function() {
         await database.writeTestResult(this.currentTest.state);
-        await database.closeConnection();
-        await logger.logToFile();
     });
 });

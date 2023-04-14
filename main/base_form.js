@@ -1,5 +1,5 @@
-const configManager = require('../config_manager');
-const logger = require('../../main/framework/logger');
+const configManager = require('./utils/data/config_manager');
+const logger = require('./utils/log/logger');
 
 class BaseForm {
     constructor(pageLocator, pageName) {

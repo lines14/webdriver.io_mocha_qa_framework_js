@@ -1,4 +1,4 @@
-const BaseForm = require('../../main/framework/base_form');
+const BaseForm = require('../../main/base_form');
 
 class HomePage extends BaseForm {
     constructor() {
