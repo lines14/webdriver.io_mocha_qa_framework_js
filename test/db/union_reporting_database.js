@@ -9,10 +9,10 @@ const listToUpdate = new Array();
 class UnionReportingDatabase extends DatabaseUtils {
     constructor() {
         super(
-            configManager.getDatabaseConfigData().dbHost || '',
-            configManager.getDatabaseConfigData().dbUser || '',
-            configManager.getDatabaseConfigData().dbPassword || '',
-            configManager.getDatabaseConfigData().dbDatabase || ''
+            process.env.DB_HOST || '',
+            process.env.DB_USER || '',
+            process.env.DB_PASSWORD || '',
+            process.env.DB_DATABASE || ''
             );
     }
 
@@ -98,7 +98,7 @@ class UnionReportingDatabase extends DatabaseUtils {
             const testObject = listOfTests[i];
             testObject["id"] = listToUpdate[i];
             testObject["start_time"] = moment().format().slice(0, 19).replace('T', ' ');
-            await new Promise(resolve => setTimeout(resolve, configManager.getConfigData().waitTime));
+            await new Promise(resolve => setTimeout(resolve, configManager.getDatabaseConfigData().dbWaitTime));
             testObject["end_time"] = moment().format().slice(0, 19).replace('T', ' ');
             testObject["status_id"] = await randomizer.getRandomNumber(configManager.getTestData().maxStatusTestsCount);
 

@@ -17,11 +17,7 @@ exports.config = {
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,
     framework: 'mocha',
-    reporters: [['allure', {
-        outputDir: 'allure-results',
-        disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: false,
-    }]],
+    reporters: [],
     mochaOpts: {
         ui: 'bdd',
         timeout: 60000

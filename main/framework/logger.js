@@ -23,7 +23,7 @@ class Logger {
     }
 
     async getTimings() {
-        const timingsList = JSON.parse(JSON.stringify(timeList));
+        const timingsList = Object.assign([], timeList);
         return timingsList;
     }
 }
