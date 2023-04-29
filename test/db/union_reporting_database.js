@@ -4,7 +4,7 @@ const logger = require('../../main/framework/logger');
 const { config } = require('../../wdio.chrome.conf');
 const randomizer = require('../../main/framework/randomizer');
 const moment = require('moment');
-const listToUpdate = new Array();
+const listToUpdate = [];
 
 class UnionReportingDatabase extends DatabaseUtils {
     constructor() {
@@ -74,7 +74,7 @@ class UnionReportingDatabase extends DatabaseUtils {
     }
 
     async cloneRandomTests(listOfTests) {
-        const updatedTests = new Array();
+        const updatedTests = [];
         const projectId = await this.getProjectId();
         const authorId = await this.getAuthorId();
 

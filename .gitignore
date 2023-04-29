@@ -4,3 +4,4 @@ test/log.txt
 test/api_token.json
 main/dump.sql
 *.xml
+.idea/

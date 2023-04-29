@@ -3,8 +3,6 @@
   "devDependencies": {
     "@wdio/allure-reporter": "^8.6.8",
     "@wdio/cli": "^8.6.1",
-    "@wdio/dot-reporter": "^8.6.8",
-    "@wdio/junit-reporter": "^8.6.8",
     "@wdio/local-runner": "^8.6.1",
     "@wdio/mocha-framework": "^8.6.1",
     "@wdio/spec-reporter": "^8.4.0",
@@ -21,6 +19,6 @@
   },
   "scripts": {
     "wdio": "wdio run ./wdio.chrome.conf.js",
-    "test": "node_modules/.bin/mocha test/specs/test2.js --timeout 60000"
+    "test": "node_modules/.bin/mocha test/**/*.js --timeout 60000 --require main/base_test --exclude test/**/test1.js"
   }
 }

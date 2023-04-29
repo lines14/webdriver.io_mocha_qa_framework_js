@@ -1,4 +1,5 @@
 {
   "url": "https://userinyerface.com/",
-  "waitTime": 10000
+  "waitTime": 10000,
+  "isMaximize": true
 }

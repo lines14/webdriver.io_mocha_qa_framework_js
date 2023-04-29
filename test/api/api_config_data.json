@@ -1,5 +1,5 @@
 {
     "apiBaseUrl": null,
     "apiTimeout": 1500,
-    "apiRequestsLimit": 5
+    "apiRequestsLimit": 6
 }
