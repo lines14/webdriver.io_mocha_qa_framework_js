@@ -1,15 +1,15 @@
-const logger = require('./utils/log/logger');
-const browserUtils = require('./driver/browser_utils');
-const unionReportingDatabase = require('../test/db/db');
+import logger from './utils/log/logger.js';
+import browserUtils from './driver/browser_utils.js';
+import db from '../test/db/db.js';
 
-exports.mochaHooks = {
+export const mochaHooks = {
     async beforeAll() {
         await browserUtils.configureBrowserCommands();
-        await unionReportingDatabase.writeProjectAndAuthor();
+        await db.writeProjectAndAuthor();
     },
     async afterAll() {
-        await unionReportingDatabase.deleteTests();
-        await unionReportingDatabase.closeConnection();
+        await db.deleteTests();
+        await db.closeConnection();
         await logger.logToFile();
     }
 }

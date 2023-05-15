@@ -1,5 +1,5 @@
-const { assert } = require("chai");
-const database = require('../db/db');
+import { assert } from "chai";
+import db from '../db/db.js';
 
 describe('Test suite', function(){    
     it('Test case', async function() {
@@ -7,6 +7,6 @@ describe('Test suite', function(){
     });
 
     after(async function() {
-        await database.writeTestResult(this.currentTest.state);
+        await db.writeTestResult(this.currentTest.state);
     });
 });

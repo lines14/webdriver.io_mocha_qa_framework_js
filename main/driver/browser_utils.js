@@ -1,5 +1,5 @@
-const logger = require('../utils/log/logger');
-const configManager = require('../utils/data/config_manager');
+import logger from '../utils/log/logger.js';
+import configManager from '../utils/data/config_manager.js';
 
 class BrowserUtils {
     async configureBrowserCommands() {
@@ -29,4 +29,4 @@ class BrowserUtils {
     }
 }
 
-module.exports = new BrowserUtils();
+export default new BrowserUtils();

@@ -1,5 +1,5 @@
-const configManager = require('./utils/data/config_manager');
-const logger = require('./utils/log/logger');
+import configManager from './utils/data/config_manager.js';
+import logger from './utils/log/logger.js';
 
 class BaseForm {
     constructor(pageLocator, pageName) {
@@ -32,4 +32,4 @@ class BaseForm {
     }
 }
 
-module.exports = BaseForm;
+export default BaseForm;

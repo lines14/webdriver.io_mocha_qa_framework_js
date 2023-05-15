@@ -1,4 +1,4 @@
-exports.config = {
+export const config = {
     runner: 'local',
     specs: [
         './test/specs/*.js'
@@ -21,6 +21,6 @@ exports.config = {
     mochaOpts: {
         ui: 'bdd',
         timeout: 60000,
-        require: ['main/base_test']
+        require: ['main/base_test.js']
     }
 }

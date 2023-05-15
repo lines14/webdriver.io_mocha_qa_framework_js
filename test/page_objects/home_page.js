@@ -1,4 +1,4 @@
-const BaseForm = require('../../main/base_form');
+import BaseForm from '../../main/base_form.js';
 
 class HomePage extends BaseForm {
     constructor() {
@@ -6,4 +6,4 @@ class HomePage extends BaseForm {
     }
 }
 
-module.exports = new HomePage();
+export default new HomePage();

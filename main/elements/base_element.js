@@ -1,6 +1,6 @@
-const randomizer = require('../utils/random/randomizer');
-const configManager = require('../utils/data/config_manager');
-const logger = require('../utils/log/logger');
+import randomizer from '../utils/random/randomizer.js';
+import configManager from '../utils/data/config_manager.js';
+import logger from '../utils/log/logger.js';
 
 class BaseElement {
     constructor(elementLocator, elementName) {
@@ -139,4 +139,4 @@ class BaseElement {
     }
 }
     
-module.exports = BaseElement;
+export default BaseElement;

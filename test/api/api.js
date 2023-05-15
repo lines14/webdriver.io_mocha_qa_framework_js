@@ -1,6 +1,6 @@
-const BaseApi = require('../../main/utils/api/base_api');
-const configManager = require('../../main/utils/data/config_manager');
-const logger = require('../../main/utils/log/logger');
+import BaseApi from '../../main/utils/api/base_api.js';
+import configManager from '../../main/utils/data/config_manager.js';
+import logger from '../../main/utils/log/logger.js';
 
 class GmailApi extends BaseApi {
     constructor(options = {}) {
@@ -19,8 +19,7 @@ class GmailApi extends BaseApi {
 
     async getMessagesCount() {
         logger.log('[info] ▶ get messages count:');
-        this.messagesPrecount = ((await this.getMessages()).data.messages).length;
-        return this.messagesPrecount;
+        return ((await this.getMessages()).data.messages).length;
     }
 
     async waitMessagesCountIncrement() {
@@ -35,6 +34,7 @@ class GmailApi extends BaseApi {
             }
             counter++;
         }
+
         messagesCount > this.messagesPrecount ? logger.log('[info] ▶ successfully receive message') : logger.log('[info] ▶ message is not received');
         return messagesCount;
     }
@@ -47,8 +47,9 @@ class GmailApi extends BaseApi {
             grant_type: process.env.GRANT_TYPE || '',
             refresh_token: process.env.REFRESH_TOKEN || ''
         }
+        
         return await this.post(configManager.getApiEndpoint().apiToken, params);
     }
 }
 
-module.exports = new GmailApi();
+export default new GmailApi();

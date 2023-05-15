@@ -1,10 +1,10 @@
-const DatabaseUtils = require('../../main/utils/db/database_utils');
-const configManager = require('../../main/utils/data/config_manager');
-const logger = require('../../main/utils/log/logger');
-const { config } = require('../../wdio.chrome.conf');
-const randomizer = require('../../main/utils/random/randomizer');
+import DatabaseUtils from '../../main/utils/db/database_utils.js';
+import configManager from '../../main/utils/data/config_manager.js';
+import logger from '../../main/utils/log/logger.js';
+import { config } from '../../wdio.chrome.conf.js';
+import randomizer from '../../main/utils/random/randomizer.js';
 
-class UnionReportingDatabase extends DatabaseUtils {
+class Db extends DatabaseUtils {
     constructor() {
         super(
             configManager.getDatabaseConfigData().dbHost || '',
@@ -45,4 +45,4 @@ class UnionReportingDatabase extends DatabaseUtils {
     }
 }
 
-module.exports = new UnionReportingDatabase();
+export default new Db();

@@ -1,5 +1,5 @@
 {
-  "name": "my-new-project",
+  "type": "module",
   "devDependencies": {
     "@wdio/allure-reporter": "^8.6.8",
     "@wdio/cli": "^8.6.1",
@@ -14,11 +14,12 @@
     "geckodriver": "^3.2.0",
     "moment": "^2.29.4",
     "mysql2": "^3.2.0",
+    "qs": "^6.11.1",
     "wdio-chromedriver-service": "^8.1.1",
     "wdio-geckodriver-service": "^4.1.1"
   },
   "scripts": {
     "wdio": "wdio run ./wdio.chrome.conf.js",
-    "test": "node_modules/.bin/mocha test/**/*.js --timeout 60000 --require main/base_test --exclude test/**/test1.js"
+    "test": "node_modules/.bin/mocha test/**/*.js --timeout 60000 --require main/base_test.js --exclude test/**/test1.js"
   }
 }
