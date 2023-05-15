@@ -1,10 +1,10 @@
-const configureData = require('../main/config_data.json');
-const testData = require('../test/test_data.json');
-const statusCode = require('./framework/api_codes.json');
-const apiEndpoint = require('../test/api/api_endpoints.json');
-const apiConfigData = require('../test/api/api_config_data.json');
-const databaseConfigData = require('../test/db/db_config_data.json');
-const path = require("path");
+import configureData from '../main/config_data.json' assert { type: "json" };
+import testData from '../test/test_data.json' assert { type: "json" };
+import statusCode from './framework/api_codes.json' assert { type: "json" };
+import apiEndpoint from '../test/api/api_endpoints.json' assert { type: "json" };
+import apiConfigData from '../test/api/api_config_data.json' assert { type: "json" };
+import databaseConfigData from '../test/db/db_config_data.json' assert { type: "json" };
+import path from "path";
 
 class ConfigManager {
     getConfigData() {
@@ -16,7 +16,7 @@ class ConfigManager {
     }
 
     getTestFile() {
-        return path.join(__dirname, "..", "template.jpg");
+        return path.join(path.resolve(), "test", "template.jpg");
     }
 
     getStatusCode() {
@@ -36,4 +36,4 @@ class ConfigManager {
     }
 }
 
-module.exports = new ConfigManager();
+export default new ConfigManager();

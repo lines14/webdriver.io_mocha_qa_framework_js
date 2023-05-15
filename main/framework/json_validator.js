@@ -1,4 +1,4 @@
-const logger = require('./logger');
+import logger from './logger.js';
 
 class JsonValidator {
     async isJson(response) {
@@ -12,4 +12,4 @@ class JsonValidator {
     }
 }
 
-module.exports = new JsonValidator();
+export default new JsonValidator();

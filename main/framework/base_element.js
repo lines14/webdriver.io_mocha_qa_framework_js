@@ -1,6 +1,6 @@
-const randomizer = require('../../main/framework/randomizer');
-const configManager = require('../config_manager');
-const logger = require('../../main/framework/logger');
+import randomizer from '../../main/framework/randomizer.js';
+import configManager from '../config_manager.js';
+import logger from '../../main/framework/logger.js';
 
 class BaseElement {
     constructor(elementLocator, elementName) {
@@ -124,7 +124,7 @@ class BaseElement {
             exceptionsLocators = args.slice(0, args.length);
         }
 
-        const exceptionsList = new Array();
+        const exceptionsList = [];
         for (let counter = 0; counter < exceptionsLocators.length; counter++) {
             exceptionsList.push(await $(exceptionsLocators[counter]));
         }
@@ -139,4 +139,4 @@ class BaseElement {
     }
 }
     
-module.exports = BaseElement;
+export default BaseElement;

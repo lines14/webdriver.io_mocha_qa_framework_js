@@ -1,5 +1,5 @@
-const BaseForm = require('../../main/framework/base_form');
-const Label = require('../../main/framework/base_element_children/label');
+import BaseForm from '../../main/framework/base_form.js';
+import Label from '../../main/framework/base_element_children/label.js';
 
 class HomePage extends BaseForm {
     constructor() {
@@ -12,4 +12,4 @@ class HomePage extends BaseForm {
     }
 }
 
-module.exports = new HomePage();
+export default new HomePage();

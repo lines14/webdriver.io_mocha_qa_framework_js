@@ -1,4 +1,4 @@
-const unionReportingDatabase = require('../db/union_reporting_database');
+import unionReportingDatabase from '../db/union_reporting_database.js';
 
 describe('Database task', function(){
     let tests;

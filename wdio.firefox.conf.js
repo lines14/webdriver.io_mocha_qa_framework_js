@@ -1,6 +1,6 @@
-const { config } = require('./wdio.shared.conf');
+import { config } from './wdio.shared.conf.js';
 
-exports.config = {
+const _config = {
     ...config,
     ...{
         capabilities: [
@@ -8,7 +8,7 @@ exports.config = {
                 browserName: 'firefox',
                 acceptInsecureCerts: true,
                 "moz:firefoxOptions": {
-                    args: ["--headless", '--private']
+                    args: ['-private']
                 }
             }
         ],
@@ -17,3 +17,5 @@ exports.config = {
         ]
     }
 }
+
+export { _config as config };

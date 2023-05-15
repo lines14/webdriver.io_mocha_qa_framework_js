@@ -1,9 +1,9 @@
-const DatabaseUtils = require('../../main/framework/database_utils');
-const configManager = require('../../main/config_manager');
-const logger = require('../../main/framework/logger');
-const { config } = require('../../wdio.chrome.conf');
-const randomizer = require('../../main/framework/randomizer');
-const moment = require('moment');
+import DatabaseUtils from '../../main/framework/database_utils.js';
+import configManager from '../../main/config_manager.js';
+import logger from '../../main/framework/logger.js';
+import { config } from '../../wdio.chrome.conf.js';
+import randomizer from '../../main/framework/randomizer.js';
+import moment from 'moment';
 const listToUpdate = [];
 
 class UnionReportingDatabase extends DatabaseUtils {
@@ -111,4 +111,4 @@ class UnionReportingDatabase extends DatabaseUtils {
     }
 }
 
-module.exports = new UnionReportingDatabase();
+export default new UnionReportingDatabase();

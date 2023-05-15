@@ -1,10 +1,10 @@
-const BaseForm = require('../../main/framework/base_form');
-const TextBox = require('../../main/framework/base_element_children/text_box');
-const CheckBox = require('../../main/framework/base_element_children/check_box');
-const Button = require('../../main/framework/base_element_children/button');
-const Label = require('../../main/framework/base_element_children/label');
-const randomizer = require('../../main/framework/randomizer');
-const configManager = require('../../main/config_manager');
+import BaseForm from '../../main/framework/base_form.js';
+import TextBox from '../../main/framework/base_element_children/text_box.js';
+import CheckBox from '../../main/framework/base_element_children/check_box.js';
+import Button from '../../main/framework/base_element_children/button.js';
+import Label from '../../main/framework/base_element_children/label.js';
+import randomizer from '../../main/framework/randomizer.js';
+import configManager from '../../main/config_manager.js';
 
 class SignInForm extends BaseForm {
     constructor() {
@@ -74,4 +74,4 @@ class SignInForm extends BaseForm {
     }
 }
 
-module.exports = new SignInForm();
+export default new SignInForm();

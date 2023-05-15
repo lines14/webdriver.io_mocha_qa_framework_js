@@ -1,8 +1,8 @@
-const { assert } = require("chai");
-const configManager = require('../../main/config_manager');
-const homePage = require('../page_objects/home_page');
-const signInForm = require('../page_objects/sign_in_form');
-const unionReportingDatabase = require('../db/union_reporting_database');
+import { assert } from "chai";
+import configManager from '../../main/config_manager.js';
+import homePage from '../page_objects/home_page.js';
+import signInForm from '../page_objects/sign_in_form.js';
+import unionReportingDatabase from '../db/union_reporting_database.js';
 
 describe('Database task', function(){
     it('Test case 1', async function() {

@@ -1,8 +1,8 @@
-const logger = require('./framework/logger');
-const browserUtils = require('./framework/browser_utils');
-const unionReportingDatabase = require('../test/db/union_reporting_database');
+import logger from './framework/logger.js';
+import browserUtils from './framework/browser_utils.js';
+import unionReportingDatabase from '../test/db/union_reporting_database.js';
 
-exports.mochaHooks = {
+export const mochaHooks = {
     async beforeAll() {
         await browserUtils.configureBrowserCommands();
         await unionReportingDatabase.writeProjectAndAuthor();

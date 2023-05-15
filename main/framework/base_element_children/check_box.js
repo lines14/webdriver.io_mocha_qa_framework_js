@@ -1,4 +1,4 @@
-const BaseElement = require('../base_element');
+import BaseElement from '../base_element.js';
 
 class CheckBox extends BaseElement {
     constructor(locator, name) {
@@ -6,4 +6,4 @@ class CheckBox extends BaseElement {
     }
 }
 
-module.exports = CheckBox;
+export default CheckBox;
