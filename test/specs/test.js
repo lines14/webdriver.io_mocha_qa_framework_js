@@ -1,12 +1,12 @@
 import { assert } from "chai";
-import db from '../db/db.js';
+import dataBase from '../DB/dataBase.js';
 
-describe('Test suite', function(){    
-    it('Test case', async function() {
+describe('Test suite', () => {    
+    it('Test case', async () => {
         
     });
 
-    after(async function() {
-        await db.writeTestResult(this.currentTest.state);
+    after(async function () {
+        await dataBase.writeTestResult(this.currentTest.state);
     });
 });

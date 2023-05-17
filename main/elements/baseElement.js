@@ -1,5 +1,5 @@
 import randomizer from '../utils/random/randomizer.js';
-import configManager from '../utils/data/config_manager.js';
+import configManager from '../utils/data/configManager.js';
 import logger from '../utils/log/logger.js';
 
 class BaseElement {
@@ -95,28 +95,27 @@ class BaseElement {
 
     async waitIsClickable() {
         logger.log(`[info] ▶ wait ${this.elementName} is clickable`);
-        await (await this.getElement()).waitForClickable({timeout:configManager.getConfigData().waitTime});
+        await (await this.getElement()).waitForClickable({ timeout: configManager.getConfigData().waitTime });
     }
 
     async waitIsNotClickable() {
         logger.log(`[info] ▶ wait ${this.elementName} is not clickable`);
-        await (await this.getElement()).waitForClickable({timeout:configManager.getConfigData().waitTime, reverse:true});
+        await (await this.getElement()).waitForClickable({ timeout: configManager.getConfigData().waitTime, reverse:true });
     }
     
     async waitIsEnabled() {
         logger.log(`[info] ▶ wait ${this.elementName} is enable`);
-        await (await this.getElement()).waitForEnabled({timeout:configManager.getConfigData().waitTime});
+        await (await this.getElement()).waitForEnabled({ timeout: configManager.getConfigData().waitTime });
     }
 
     async waitIsExisting() {
         logger.log(`[info] ▶ wait ${this.elementName} is exists`);
-        await (await this.getElement()).waitForExist({timeout:configManager.getConfigData().waitTime});
+        await (await this.getElement()).waitForExist({ timeout: configManager.getConfigData().waitTime });
     }
 
     async clickRandomElementsFromList(...args) {
         let count = args[0];
         let exceptionsLocators = args.slice(1, args.length);
-
         if (args === undefined) {
             count = 1;
         } else if (typeof args[0] !== 'number') {
@@ -124,11 +123,7 @@ class BaseElement {
             exceptionsLocators = args.slice(0, args.length);
         }
 
-        const exceptionsList = [];
-        for (let counter = 0; counter < exceptionsLocators.length; counter++) {
-            exceptionsList.push(await $(exceptionsLocators[counter]));
-        }
-
+        const exceptionsList = exceptionsLocators.map(async (element) => await $(element));
         for (let counter = 0; counter < count; counter++) {
             logger.log(`[info] ▶ click random element from ${this.elementName}`);
             const randomElement = await randomizer.getRandomElement(await this.getElements(), exceptionsList);

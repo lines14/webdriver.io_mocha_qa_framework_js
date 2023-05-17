@@ -1,4 +1,4 @@
-import BaseElement from '../base_element.js';
+import BaseElement from '../baseElement.js';
 
 class TextBox extends BaseElement {
     constructor(locator, name) {

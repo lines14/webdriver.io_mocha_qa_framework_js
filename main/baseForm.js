@@ -1,4 +1,4 @@
-import configManager from './utils/data/config_manager.js';
+import configManager from './utils/data/configManager.js';
 import logger from './utils/log/logger.js';
 
 class BaseForm {
@@ -23,12 +23,12 @@ class BaseForm {
 
     async waitPageIsDisplayed() {
         logger.log(`[info] ▶ wait ${this.elementName} is open`);
-        await (await this.getUniqueElement()).waitForDisplayed({timeout:configManager.getConfigData().waitTime});
+        await (await this.getUniqueElement()).waitForDisplayed({ timeout: configManager.getConfigData().waitTime });
     }
     
     async waitPageIsEnabled() {
         logger.log(`[info] ▶ wait ${this.elementName} is enable`);
-        await (await this.getUniqueElement()).waitForEnabled({timeout:configManager.getConfigData().waitTime});
+        await (await this.getUniqueElement()).waitForEnabled({ timeout: configManager.getConfigData().waitTime });
     }
 }
 

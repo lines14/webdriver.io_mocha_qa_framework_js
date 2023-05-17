@@ -1,5 +1,5 @@
 {
-  "url": "https://userinyerface.com/",
+  "baseURL": "https://userinyerface.com/",
   "waitTime": 10000,
   "isMaximize": true
 }

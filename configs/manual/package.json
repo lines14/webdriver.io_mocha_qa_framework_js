@@ -18,6 +18,6 @@
   },
   "scripts": {
     "wdio": "wdio run ./wdio.chrome.conf.js",
-    "test": "node_modules/.bin/mocha test/**/*.js --timeout 60000 --require main/base_test.js --exclude test/**/test1.js"
+    "test": "node_modules/.bin/mocha test/**/*.js --timeout 60000 --require main/baseTest.js --exclude test/**/test1.js"
   }
 }

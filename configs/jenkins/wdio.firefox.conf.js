@@ -8,14 +8,12 @@ const _config = {
                 browserName: 'firefox',
                 acceptInsecureCerts: true,
                 "moz:firefoxOptions": {
-                    args: ["--headless", '--private']
-                }
-            }
+                    args: ["--headless", '--private'],
+                },
+            },
         ],
-        services: [
-            'geckodriver'
-        ]
-    }
+        services: ['geckodriver'],
+    },
 }
 
 export { _config as config };

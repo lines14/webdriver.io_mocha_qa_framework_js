@@ -1,4 +1,4 @@
-import BaseForm from '../../main/base_form.js';
+import BaseForm from '../../main/baseForm.js';
 
 class HomePage extends BaseForm {
     constructor() {

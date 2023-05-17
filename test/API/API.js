@@ -1,20 +1,21 @@
-import BaseApi from '../../main/utils/api/base_api.js';
-import configManager from '../../main/utils/data/config_manager.js';
+import BaseAPI from '../../main/utils/API/baseAPI.js';
+import configManager from '../../main/utils/data/configManager.js';
 import logger from '../../main/utils/log/logger.js';
 
-class GmailApi extends BaseApi {
+class API extends BaseAPI {
     constructor(options = {}) {
         super(
-            options.baseURL || configManager.getApiConfigData().apiBaseUrl,
+            options.baseURL || configManager.getAPIConfigData().APIBaseURL,
             options.log || '[info] ▶ set base api url',
             configManager.getConfigData().waitTime, 
-            { Authorization: `Bearer ${process.env.ACCESS_TOKEN || ''}` }
-            );
+            { 
+                Authorization: `Bearer ${process.env.ACCESS_TOKEN || ''}`,
+            });
     }
 
     async getMessages(id) {
-        await new Promise(resolve => setTimeout(resolve, configManager.getApiConfigData().apiTimeout));
-        return id ? await this.get(`${configManager.getApiEndpoint().apiMessages}/${id}`) : await this.get(configManager.getApiEndpoint().apiMessages);
+        await new Promise((resolve) => setTimeout(resolve, configManager.getAPIConfigData().APITimeout));
+        return id ? await this.get(`${configManager.getAPIEndpoint().APIMessages}/${id}`) : await this.get(configManager.getAPIEndpoint().APIMessages);
     }
 
     async getMessagesCount() {
@@ -27,11 +28,9 @@ class GmailApi extends BaseApi {
         let messagesCount = this.messagesPrecount;
         logger.log(`[info] ▶ wait incoming message:`);
 
-        while (counter < configManager.getApiConfigData().apiRequestsLimit) {
+        while (counter < configManager.getAPIConfigData().APIRequestsLimit) {
             messagesCount = ((await this.getMessages()).data.messages).length;
-            if (messagesCount > this.messagesPrecount) {
-                break;
-            }
+            if (messagesCount > this.messagesPrecount) break;
             counter++;
         }
 
@@ -40,16 +39,16 @@ class GmailApi extends BaseApi {
     }
 
     async refreshToken() {
-        new GmailApi({ baseURL: configManager.getApiConfigData().apiAuthUrl, log: '[info] ▶ set auth api url' });
+        new GmailAPI({ baseURL: configManager.getAPIConfigData().APIAuthURL, log: '[info] ▶ set auth api url' });
         const params = { 
             client_id: process.env.CLIENT_ID || '', 
             client_secret: process.env.CLIENT_SECRET || '', 
             grant_type: process.env.GRANT_TYPE || '',
-            refresh_token: process.env.REFRESH_TOKEN || ''
+            refresh_token: process.env.REFRESH_TOKEN || '',
         }
         
-        return await this.post(configManager.getApiEndpoint().apiToken, params);
+        return await this.post(configManager.getAPIEndpoint().APIToken, params);
     }
 }
 
-export default new GmailApi();
+export default new API();

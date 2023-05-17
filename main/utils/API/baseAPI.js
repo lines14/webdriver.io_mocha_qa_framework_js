@@ -2,9 +2,9 @@ import axios from 'axios';
 import logger from '../log/logger.js';
 import qs from 'qs';
 
-class BaseApi {
+class BaseAPI {
     constructor(baseURL, logString, timeout, headers) {
-        logString ? logger.log(`${logString} ${baseURL}`) : logString;
+        if (logString) logger.log(`${logString} ${baseURL}`);
         axios.defaults.baseURL = baseURL;
         axios.defaults.timeout = timeout;
         axios.defaults.headers = headers;
@@ -71,4 +71,4 @@ class BaseApi {
     }
 }
 
-export default BaseApi;
+export default BaseAPI;
