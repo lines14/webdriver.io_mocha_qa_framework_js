@@ -1,12 +1,12 @@
 import { assert } from "chai";
-import configManager from '../../main/config_manager.js';
-import homePage from '../page_objects/home_page.js';
-import signInForm from '../page_objects/sign_in_form.js';
-import unionReportingDatabase from '../db/union_reporting_database.js';
+import configManager from '../../main/configManager.js';
+import homePage from '../pageObjects/homePage.js';
+import signInForm from '../pageObjects/signInForm.js';
+import unionReportingDatabase from '../DB/unionReportingDatabase.js';
 
-describe('Database task', function(){
-    it('Test case 1', async function() {
-        await browser.url(configManager.getConfigData().url);
+describe('Database task', () => {
+    it('Test case 1', async () => {
+        await browser.url(configManager.getConfigData().baseURL);
         assert.isTrue(await homePage.pageIsDisplayed(), 'welcome page is not open');
 
         await homePage.clickLink();
@@ -16,7 +16,7 @@ describe('Database task', function(){
         assert.isNotTrue(await signInForm.cookiesMessageExisting(), 'Form is not closed');
     });
 
-    after(async function() {
+    after(async function () {
         await unionReportingDatabase.writeTestResult(this.currentTest.state);
     });
 });

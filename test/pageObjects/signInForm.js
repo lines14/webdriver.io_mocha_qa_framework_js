@@ -1,10 +1,10 @@
-import BaseForm from '../../main/framework/base_form.js';
-import TextBox from '../../main/framework/base_element_children/text_box.js';
-import CheckBox from '../../main/framework/base_element_children/check_box.js';
-import Button from '../../main/framework/base_element_children/button.js';
-import Label from '../../main/framework/base_element_children/label.js';
+import BaseForm from '../../main/framework/baseForm.js';
+import TextBox from '../../main/framework/baseElementChildren/textBox.js';
+import CheckBox from '../../main/framework/baseElementChildren/checkBox.js';
+import Button from '../../main/framework/baseElementChildren/button.js';
+import Label from '../../main/framework/baseElementChildren/label.js';
 import randomizer from '../../main/framework/randomizer.js';
-import configManager from '../../main/config_manager.js';
+import configManager from '../../main/configManager.js';
 
 class SignInForm extends BaseForm {
     constructor() {

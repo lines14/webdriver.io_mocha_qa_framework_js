@@ -5,11 +5,13 @@ class DatabaseUtils {
     constructor(host, user, password, database) {
         logger.log(`[info] ▶ connect to ${database} database`);
         createConnection({
-            host: host,
-            user: user,
-            password: password,
-            database: database
-        }).then(conn => this.connection = conn);
+            host,
+            user,
+            password,
+            database,
+        }).then((conn) => {
+            this.connection = conn;
+        });
     }
 
     async closeConnection() {
@@ -24,11 +26,9 @@ class DatabaseUtils {
     }
 
     async sqlGet(tableName, target='*', conditions='', values=[]) {
-        const valuesArray = values;
         const log = `[info] ▶ select data from ${tableName} table`;
         const query =`SELECT ${target} FROM ${tableName} ${conditions};`;
-
-        return await this.sqlQuery(query, valuesArray, log);
+        return await this.sqlQuery(query, values, log);
     }
 
     async sqlAdd(tableName, dataObject) {
@@ -36,7 +36,6 @@ class DatabaseUtils {
         const columnNames = Object.keys(dataObject);
         const values = Object.values(dataObject);
         const query = `INSERT INTO ${tableName} (${columnNames}) VALUES (?)`;
-        
         return await this.sqlQuery(query, values, log);
     }
 
@@ -45,24 +44,19 @@ class DatabaseUtils {
         const columnNames = Object.keys(dataObject);
         const values = Object.values(dataObject);
         const query = `REPLACE INTO ${tableName} (${columnNames}) VALUES (?)`;
-        
         await this.sqlQuery(query, values, log);
     }
 
     async sqlDelete(tableName, conditions='', values=[]) {
-        const valuesArray = values;
         const log = `[info] ▶ delete data from ${tableName} table`;
         const query =`DELETE FROM ${tableName} ${conditions};`;
-
-        await this.sqlQuery(query, valuesArray, log);
+        await this.sqlQuery(query, values, log);
     }
 
     async sqlEdit(tableName, target='*', conditions='', values=[]) {
-        const valuesArray = values;
         const log = `[info] ▶ update data in ${tableName} table`;
         const query =`UPDATE ${tableName} SET ${target} ${conditions};`;
-
-        await this.sqlQuery(query, valuesArray, log);
+        await this.sqlQuery(query, values, log);
     }
 }
 

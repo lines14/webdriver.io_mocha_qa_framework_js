@@ -1,5 +1,5 @@
-import BaseForm from '../../main/framework/base_form.js';
-import Label from '../../main/framework/base_element_children/label.js';
+import BaseForm from '../../main/framework/baseForm.js';
+import Label from '../../main/framework/baseElementChildren/label.js';
 
 class HomePage extends BaseForm {
     constructor() {

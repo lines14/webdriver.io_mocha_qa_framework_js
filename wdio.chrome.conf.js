@@ -8,14 +8,12 @@ const _config = {
                 browserName: 'chrome',
                 acceptInsecureCerts: true,
                 "goog:chromeOptions": {
-                    args: ['--incognito']
-                }
-            }
+                    args: ['--incognito'],
+                },
+            },
         ],
-        services: [
-            'chromedriver'
-        ]
-    }
+        services: ['chromedriver'],
+    },
 }
 
 export { _config as config };

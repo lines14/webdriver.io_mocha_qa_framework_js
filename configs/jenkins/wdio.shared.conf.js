@@ -1,14 +1,12 @@
 export const config = {
     runner: 'local',
-    specs: [
-        './test/specs/*.js'
-    ],
+    specs: ['./test/specs/*.js'],
     exclude: [],
     maxInstances: 1,
     capabilities: [{
         maxInstances: 5,
         browserName: 'chrome',
-        acceptInsecureCerts: true
+        acceptInsecureCerts: true,
     }],
     logLevel: 'error',
     bail: 0,
@@ -25,6 +23,6 @@ export const config = {
     mochaOpts: {
         ui: 'bdd',
         timeout: 60000,
-        require: ['main/base_test.js']
-    }
+        require: ['main/baseTest.js'],
+    },
 }

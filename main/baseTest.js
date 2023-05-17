@@ -1,6 +1,6 @@
 import logger from './framework/logger.js';
-import browserUtils from './framework/browser_utils.js';
-import unionReportingDatabase from '../test/db/union_reporting_database.js';
+import browserUtils from './framework/browserUtils.js';
+import unionReportingDatabase from '../test/DB/unionReportingDatabase.js';
 
 export const mochaHooks = {
     async beforeAll() {
@@ -11,5 +11,5 @@ export const mochaHooks = {
         await unionReportingDatabase.deleteTests();
         await unionReportingDatabase.closeConnection();
         await logger.logToFile();
-    }
+    },
 }

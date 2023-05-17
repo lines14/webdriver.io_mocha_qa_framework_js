@@ -1,0 +1,10 @@
+{
+    "DBProjectName": "task_database",
+    "DBAuthorName": "alipatov",
+    "DBAuthorLogin": "lines14",
+    "DBAuthorEmail": "lines14.qa@gmail.com",
+    "testName": "verify that cookies form can be closed",
+    "method_name": "functional testing",
+    "env": "alipatov",
+    "DBWaitTime": 1000
+}
