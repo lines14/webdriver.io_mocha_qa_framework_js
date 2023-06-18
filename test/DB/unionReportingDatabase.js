@@ -9,10 +9,11 @@ const listToUpdate = [];
 class UnionReportingDatabase extends DatabaseUtils {
     constructor() {
         super(
-            process.env.DB_HOST || '',
-            process.env.DB_USER || '',
-            process.env.DB_PASSWORD || '',
-            process.env.DB_DATABASE || '',
+            '' || process.env.DB_HOST,
+            '' || process.env.DB_USER,
+            '' || process.env.DB_PASSWORD,
+            '' || process.env.DB_DATABASE,
+            '' || process.env.DB_PORT,
             );
     }
 

@@ -8,7 +8,7 @@ const _config = {
                 browserName: 'firefox',
                 acceptInsecureCerts: true,
                 "moz:firefoxOptions": {
-                    args: ['-private'],
+                    args: ["--headless", '--private'],
                 },
             },
         ],

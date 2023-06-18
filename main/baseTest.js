@@ -5,7 +5,6 @@ import unionReportingDatabase from '../test/DB/unionReportingDatabase.js';
 export const mochaHooks = {
     async beforeAll() {
         await browserUtils.configureBrowserCommands();
-        await unionReportingDatabase.writeProjectAndAuthor();
     },
     async afterAll() {
         await unionReportingDatabase.deleteTests();

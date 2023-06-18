@@ -2,13 +2,14 @@ import { createConnection } from 'mysql2/promise';
 import logger from './logger.js';
 
 class DatabaseUtils {
-    constructor(host, user, password, database) {
+    constructor(host, user, password, database, port) {
         logger.log(`[info] ▶ connect to ${database} database`);
         createConnection({
             host,
             user,
             password,
             database,
+            port,
         }).then((conn) => {
             this.connection = conn;
         });
