@@ -1,3 +1,4 @@
+import EC from 'wdio-wait-for';
 import Randomizer from '../../main/framework/randomizer.js';
 import ConfigManager from '../configManager.js';
 import Logger from '../../main/framework/logger.js';
@@ -20,6 +21,10 @@ class BaseElement {
         Logger.log(`[info] ▶ get ${this.elementName} text:`);
         Logger.log(`[info]   text contains: "${(await (await this.getElement()).getText())}"`);
         return await (await this.getElement()).getText();
+    }
+
+    async waitForText(text) {
+        await browser.waitUntil(EC.textToBePresentInElement(this.elementLocator, text) , { timeout: ConfigManager.getConfigData().waitTime });
     }
 
     async clickElement() {
@@ -140,7 +145,7 @@ class BaseElement {
         const exceptionsList = exceptionsLocators.map(async (element) => await $(element));
         for (let counter = 0; counter < count; counter++) {
             Logger.log(`[info] ▶ click random element from ${this.elementName}`);
-            const randomElement = await randomizer.getRandomElement(await this.getElements(), exceptionsList);
+            const randomElement = await Randomizer.getRandomElement(await this.getElements(), exceptionsList);
             await randomElement.click();
             exceptionsList.push(randomElement);
             return randomElement;
