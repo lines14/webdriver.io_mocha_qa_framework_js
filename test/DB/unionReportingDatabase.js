@@ -1,8 +1,8 @@
 import DatabaseUtils from '../../main/framework/databaseUtils.js';
-import configManager from '../../main/configManager.js';
-import logger from '../../main/framework/logger.js';
+import ConfigManager from '../../main/configManager.js';
+import Logger from '../../main/framework/logger.js';
 import { config } from '../../wdio.chrome.conf.js';
-import randomizer from '../../main/framework/randomizer.js';
+import Randomizer from '../../main/framework/randomizer.js';
 import moment from 'moment';
 const listToUpdate = [];
 
@@ -19,13 +19,13 @@ class UnionReportingDatabase extends DatabaseUtils {
 
     async writeProjectAndAuthor() {
         const projectObject = {
-            name: configManager.getDBConfigData().DBProjectName,
+            name: ConfigManager.getDBConfigData().DBProjectName,
         }
 
         const authorObject = {
-            name: configManager.getDBConfigData().DBAuthorName,
-            login: configManager.getDBConfigData().DBAuthorLogin,
-            email: configManager.getDBConfigData().DBAuthorEmail,
+            name: ConfigManager.getDBConfigData().DBAuthorName,
+            login: ConfigManager.getDBConfigData().DBAuthorLogin,
+            email: ConfigManager.getDBConfigData().DBAuthorEmail,
         }
 
         await this.sqlRefresh('project', projectObject);
@@ -33,21 +33,21 @@ class UnionReportingDatabase extends DatabaseUtils {
     }
 
     async getProjectId() {
-        return (await this.sqlGet('project', 'id', 'WHERE `name` = ?', [configManager.getDBConfigData().DBProjectName])).pop().id
+        return (await this.sqlGet('project', 'id', 'WHERE `name` = ?', [ConfigManager.getDBConfigData().DBProjectName])).pop().id
     }
 
     async getAuthorId() {
-        return (await this.sqlGet('author', 'id', 'WHERE `name` = ?', [configManager.getDBConfigData().DBAuthorName])).pop().id
+        return (await this.sqlGet('author', 'id', 'WHERE `name` = ?', [ConfigManager.getDBConfigData().DBAuthorName])).pop().id
     }
 
     async writeTestResult(state) {
         const testObject = {
-            name: configManager.getDBConfigData().testName,
-            method_name: configManager.getDBConfigData().method_name,
-            session_id: await randomizer.getRandomNumber(configManager.getTestData().maxSessionsCount),
-            start_time: (await logger.getTimings()).shift(),
-            end_time: (await logger.getTimings()).pop(),
-            env: configManager.getDBConfigData().env,
+            name: ConfigManager.getDBConfigData().testName,
+            method_name: ConfigManager.getDBConfigData().method_name,
+            session_id: await Randomizer.getRandomNumber(ConfigManager.getTestData().maxSessionsCount),
+            start_time: (await Logger.getTimings()).shift(),
+            end_time: (await Logger.getTimings()).pop(),
+            env: ConfigManager.getDBConfigData().env,
             browser: config.capabilities.pop().browserName,
             project_id: await this.getProjectId(),
             author_id: await this.getAuthorId(),
@@ -60,9 +60,9 @@ class UnionReportingDatabase extends DatabaseUtils {
     async getRandomTests() {
         const listOfIdentifiers = await this.sqlGet('test', 'id', 'ORDER BY id ASC');
         const setOfIdentifiers = new Set();
-        for (let i = 0; setOfIdentifiers.size < configManager.getTestData().maxRandomTestsCount; i++) {
+        for (let i = 0; setOfIdentifiers.size < ConfigManager.getTestData().maxRandomTestsCount; i++) {
             const sortedId = (listOfIdentifiers[i]).id;
-            (configManager.getTestData().listOfDoubleDigits).forEach((element) => {
+            (ConfigManager.getTestData().listOfDoubleDigits).forEach((element) => {
                 if ((sortedId.toString()).includes(element.toString())) setOfIdentifiers.add(sortedId);
             });
         }
@@ -86,7 +86,7 @@ class UnionReportingDatabase extends DatabaseUtils {
 
     async simulateTests(listOfTests) {
         for (let i = 0; i < listOfTests.length; i++) {
-            logger.log(`[info] ▶ run test ${i}`);
+            Logger.log(`[info] ▶ run test ${i}`);
             const testObject = listOfTests[i];
             testObject["id"] = listToUpdate[i];
             testObject["start_time"] = moment()
@@ -94,13 +94,13 @@ class UnionReportingDatabase extends DatabaseUtils {
             .slice(0, 19)
             .replace('T', ' ');
 
-            await new Promise((resolve) => setTimeout(resolve, configManager.getDBConfigData().DBWaitTime));
+            await new Promise((resolve) => setTimeout(resolve, ConfigManager.getDBConfigData().DBWaitTime));
             testObject["end_time"] = moment()
             .format()
             .slice(0, 19)
             .replace('T', ' ');
 
-            testObject["status_id"] = await randomizer.getRandomNumber(configManager.getTestData().maxStatusTestsCount);
+            testObject["status_id"] = await Randomizer.getRandomNumber(ConfigManager.getTestData().maxStatusTestsCount);
             await this.sqlRefresh('test', testObject);
         }
     }

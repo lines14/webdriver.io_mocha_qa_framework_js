@@ -3,8 +3,8 @@ import TextBox from '../../main/framework/baseElementChildren/textBox.js';
 import CheckBox from '../../main/framework/baseElementChildren/checkBox.js';
 import Button from '../../main/framework/baseElementChildren/button.js';
 import Label from '../../main/framework/baseElementChildren/label.js';
-import randomizer from '../../main/framework/randomizer.js';
-import configManager from '../../main/configManager.js';
+import Randomizer from '../../main/framework/randomizer.js';
+import ConfigManager from '../../main/configManager.js';
 
 class SignInForm extends BaseForm {
     constructor() {
@@ -24,9 +24,33 @@ class SignInForm extends BaseForm {
     }
 
     async inputSignInData() {
-        await this.passwordBox.inputData(await randomizer.getRandomString(true, true, true, configManager.getTestData().sameCharacter, configManager.getTestData().minStringLength));
-        await this.emailBox.inputData(await randomizer.getRandomString(true, true, true, configManager.getTestData().sameCharacter, configManager.getTestData().minStringLength));
-        await this.domainBox.inputData(await randomizer.getRandomString(true, true, true, configManager.getTestData().sameCharacter, configManager.getTestData().minStringLength));
+        await this.passwordBox.inputData(
+            await Randomizer.getRandomString(
+                true, 
+                true, 
+                true, 
+                ConfigManager.getTestData().sameCharacter, 
+                ConfigManager.getTestData().minStringLength
+            )
+        );
+        await this.emailBox.inputData(
+            await Randomizer.getRandomString(
+                true, 
+                true, 
+                true, 
+                ConfigManager.getTestData().sameCharacter, 
+                ConfigManager.getTestData().minStringLength
+            )
+        );
+        await this.domainBox.inputData(
+            await Randomizer.getRandomString(
+                true, 
+                true, 
+                true, 
+                ConfigManager.getTestData().sameCharacter, 
+                ConfigManager.getTestData().minStringLength
+            )
+        );
     }
 
     async openDropdown() {

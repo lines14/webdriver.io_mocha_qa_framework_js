@@ -1,10 +1,10 @@
-import logger from './logger.js';
+import Logger from './logger.js';
 
 class JSONValidator {
-    async isJson(response) {
-        logger.log(`[info] ▶ check response is json`);
+    static async isJson(response) {
+        Logger.log(`[info] ▶ check response is json`);
         return typeof response === "object";
     }
 }
 
-export default new JSONValidator();
+export default JSONValidator;
