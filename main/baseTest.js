@@ -1,15 +1,15 @@
-import logger from './utils/log/logger.js';
-import browserUtils from './driver/browserUtils.js';
+import Logger from './utils/log/logger.js';
+import BrowserUtils from './driver/browserUtils.js';
 import dataBase from '../test/DB/dataBase.js';
 
 export const mochaHooks = {
     async beforeAll() {
-        await browserUtils.configureBrowserCommands();
+        await BrowserUtils.configureBrowserCommands();
         await dataBase.writeProjectAndAuthor();
     },
     async afterAll() {
         await dataBase.deleteTests();
         await dataBase.closeConnection();
-        await logger.logToFile();
+        await Logger.logToFile();
     },
 }

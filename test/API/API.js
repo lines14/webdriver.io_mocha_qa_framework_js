@@ -1,45 +1,49 @@
 import BaseAPI from '../../main/utils/API/baseAPI.js';
-import configManager from '../../main/utils/data/configManager.js';
-import logger from '../../main/utils/log/logger.js';
+import ConfigManager from '../../main/utils/data/configManager.js';
+import Logger from '../../main/utils/log/logger.js';
 
 class API extends BaseAPI {
     constructor(options = {}) {
         super(
-            options.baseURL || configManager.getAPIConfigData().APIBaseURL,
+            options.baseURL || ConfigManager.getAPIConfigData().APIBaseURL,
             options.log || '[info] ▶ set base api url',
-            configManager.getConfigData().waitTime, 
+            ConfigManager.getConfigData().waitTime, 
             { 
                 Authorization: `Bearer ${process.env.ACCESS_TOKEN || ''}`,
             });
     }
 
     async getMessages(id) {
-        await new Promise((resolve) => setTimeout(resolve, configManager.getAPIConfigData().APITimeout));
-        return id ? await this.get(`${configManager.getAPIEndpoint().APIMessages}/${id}`) : await this.get(configManager.getAPIEndpoint().APIMessages);
+        await new Promise((resolve) => setTimeout(resolve, ConfigManager.getAPIConfigData().APITimeout));
+        return id 
+        ? await this.get(`${ConfigManager.getAPIEndpoint().APIMessages}/${id}`) 
+        : await this.get(ConfigManager.getAPIEndpoint().APIMessages);
     }
 
     async getMessagesCount() {
-        logger.log('[info] ▶ get messages count:');
+        Logger.log('[info] ▶ get messages count:');
         return ((await this.getMessages()).data.messages).length;
     }
 
     async waitMessagesCountIncrement() {
         let counter = 0;
         let messagesCount = this.messagesPrecount;
-        logger.log(`[info] ▶ wait incoming message:`);
+        Logger.log(`[info] ▶ wait incoming message:`);
 
-        while (counter < configManager.getAPIConfigData().APIRequestsLimit) {
+        while (counter < ConfigManager.getAPIConfigData().APIRequestsLimit) {
             messagesCount = ((await this.getMessages()).data.messages).length;
             if (messagesCount > this.messagesPrecount) break;
             counter++;
         }
 
-        messagesCount > this.messagesPrecount ? logger.log('[info] ▶ successfully receive message') : logger.log('[info] ▶ message is not received');
+        messagesCount > this.messagesPrecount 
+        ? Logger.log('[info] ▶ successfully receive message') 
+        : Logger.log('[info] ▶ message is not received');
         return messagesCount;
     }
 
     async refreshToken() {
-        new GmailAPI({ baseURL: configManager.getAPIConfigData().APIAuthURL, log: '[info] ▶ set auth api url' });
+        new GmailAPI({ baseURL: ConfigManager.getAPIConfigData().APIAuthURL, log: '[info] ▶ set auth api url' });
         const params = { 
             client_id: process.env.CLIENT_ID || '', 
             client_secret: process.env.CLIENT_SECRET || '', 
@@ -47,7 +51,7 @@ class API extends BaseAPI {
             refresh_token: process.env.REFRESH_TOKEN || '',
         }
         
-        return await this.post(configManager.getAPIEndpoint().APIToken, params);
+        return await this.post(ConfigManager.getAPIEndpoint().APIToken, params);
     }
 }
 

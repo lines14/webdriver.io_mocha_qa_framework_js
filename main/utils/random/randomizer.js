@@ -1,5 +1,5 @@
 class Randomizer {
-    async getRandomElement(baseElements, exceptionsList) {
+    static async getRandomElement(baseElements, exceptionsList) {
         const baseElementsList = baseElements.slice(0, baseElements.length);
         let element;
         do {
@@ -9,7 +9,7 @@ class Randomizer {
         return element;
     }
 
-    async getRandomString(hasUpperCase=false, hasNumber=false, hasCyrillic=false, chosenLetter=false, minLength=1, maxLength=10) {
+    static async getRandomString(hasUpperCase=false, hasNumber=false, hasCyrillic=false, chosenLetter=false, minLength=1, maxLength=10) {
         const upperCaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz';
         const numbers = '0123456789';
@@ -38,11 +38,11 @@ class Randomizer {
         return await this.stringShuffler(randomString);
     }
 
-    async getRandomNumber(max=9, min=1) {
+    static async getRandomNumber(max=9, min=1) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    async stringShuffler(inputString) {
+    static async stringShuffler(inputString) {
         let array = inputString.split('');
         let currentIndex = array.length;
         let temporaryValue;
@@ -59,4 +59,4 @@ class Randomizer {
     }
 }
 
-export default new Randomizer();
+export default Randomizer;
