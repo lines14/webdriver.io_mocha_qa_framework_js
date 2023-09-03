@@ -14,7 +14,8 @@
     "mysql2": "^3.2.0",
     "qs": "^6.11.1",
     "wdio-chromedriver-service": "^8.1.1",
-    "wdio-geckodriver-service": "^4.1.1"
+    "wdio-geckodriver-service": "^4.1.1",
+    "wdio-wait-for": "^3.0.6"
   },
   "scripts": {
     "wdio": "wdio run ./wdio.chrome.conf.js",

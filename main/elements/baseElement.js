@@ -1,3 +1,4 @@
+import EC from 'wdio-wait-for';
 import Randomizer from '../utils/random/randomizer.js';
 import ConfigManager from '../utils/data/configManager.js';
 import Logger from '../utils/log/logger.js';
@@ -20,6 +21,10 @@ class BaseElement {
         Logger.log(`[info] ▶ get ${this.elementName} text:`);
         Logger.log(`[info]   text contains: "${(await (await this.getElement()).getText())}"`);
         return await (await this.getElement()).getText();
+    }
+
+    async waitForText(text) {
+        await browser.waitUntil(EC.textToBePresentInElement(this.elementLocator, text) , { timeout: ConfigManager.getConfigData().waitTime });
     }
 
     async clickElement() {
